@@ -116,5 +116,11 @@
     "role": "Product Owner",
     "org": "Hive",
     "date": "January 2025"
+  },
+  {
+    "id": "homepage-customer",
+    "text": "Thanks very much – we have the staff in, they are loving their individual pages. I've had a great response from them.",
+    "role": "Customer",
+    "org": "public-sector organisation"
   }
 ]

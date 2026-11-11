@@ -1,13 +1,41 @@
 ---
-kind: short
-order: 30
+kind: full
+order: 2
 name: Onboarding and Exit Surveys
-title: Onboarding and Exit Surveys
-summary: A new survey type with per-survey confidentiality, plus a refactor so any new metric plugs in without bespoke code.
+title: Added onboarding and exit surveys by making the survey builder work for any metric
+summary: A new survey type with per-survey confidentiality, built by making the survey builder and reporting work for any metric instead of assuming eNPS.
 dates: Sep – Dec 2024
+role: Owned end to end
+scope: About 30 pull requests
+stack: [React, Redux, GraphQL, MongoDB, Elasticsearch]
+headline:
+  value: ~200
+  label: customer organisations with onboarding and exit surveys enabled
+diagram:
+  - Builder assumed eNPS
+  - Builder made metric-neutral
+  - Onboarding and Exit Indexes added
+  - Continuous, confidential surveys
+inPractice:
+  - Added Onboarding and Exit survey types, released behind a feature flag and a create permission.
+  - Per-survey confidentiality limits, including turning confidentiality off, enforced the same way in search, heatmaps and CSV exports.
+  - Continuous surveys with no closing date, plus a settings menu to add recipients to, or close, any survey.
+  - Refactored the metric component, review tab and key driver analysis to work with any metric, not just eNPS and the Engagement Index.
+result:
+  - Shipped and enabled for all ~200 Hive customers. The Product Owner credited it with a positive impact on new business and retention.
+  - It became the foundation for survey auto-enrolment, which sends these surveys to new starters and leavers automatically.
 quotes: [onboarding-gap]
 ---
 
-A new survey type with per-survey confidentiality, plus a refactor so any new metric plugs in without bespoke code.
+## The problem
 
-It built on [Scheduled Surveys](/work/scheduled-surveys/), which made automatic sending possible.
+HR teams wanted dedicated surveys for new starters and leavers, but Hive had a feature gap: the survey builder and its reporting assumed every survey measured eNPS or the Engagement Index.
+
+Onboarding and exit surveys need their own metrics, their own confidentiality rules and no fixed end date. They also need to send automatically, which [Scheduled Surveys](/work/scheduled-surveys/) had just made possible.
+
+## What I did
+
+- Added Onboarding and Exit survey types and icons, released behind a feature flag and a create permission.
+- Added per-survey confidentiality limits, including the option to remove confidentiality entirely, enforced consistently across Elasticsearch, MongoDB and heatmaps, and CSV exports.
+- Let onboarding and exit surveys run with no closing date, as continuous surveys, and added a settings menu to add recipients to, or close, any survey type.
+- Added Onboarding Index and Exit Index question categories, then refactored the metric component, review tab and key driver analysis to be generic over any metric instead of hard-coding eNPS and the Engagement Index.
