@@ -7,7 +7,7 @@ import { siteConfig } from '@/config/site';
 ---
 
 <section id="top" class="shell pt-10 pb-14 sm:pt-12 sm:pb-16 lg:pt-14" aria-labelledby="hero-title">
-  <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_15rem] lg:items-center xl:grid-cols-[minmax(0,1fr)_17rem]">
+  <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-12 lg:items-center xl:grid-cols-[minmax(0,1fr)_17rem]">
     <div>
       {siteConfig.availability.enabled && (
         <p class="rise inline-flex items-center gap-3 rounded-full border border-line bg-surface py-1.5 pr-4 pl-3 text-sm text-body shadow-[0_1px_2px_rgb(18_18_17/0.04)]">
@@ -42,8 +42,9 @@ import { siteConfig } from '@/config/site';
       src={portrait}
       formats={['avif', 'webp']}
       alt="David Cellini, smiling, in a black T-shirt"
-      widths={[272, 408, 544, 816]}
-      sizes="(min-width: 80rem) 17rem, 15rem"
+      widths={[176, 272, 408, 544, 816]}
+      sizes="(min-width: 80rem) 17rem, (min-width: 64rem) 15rem, 9rem"
+      pictureAttributes={{ class: 'portrait-frame' }}
       loading="eager"
       class="rise portrait"
       style="--rise-step: 3"
@@ -70,10 +71,27 @@ import { siteConfig } from '@/config/site';
     border-radius: var(--radius-card);
   }
 
-  /* Phones and tablets keep the hero short; the photo shows from 1024px. */
+  /* Phones and tablets: a small round photo above the badge keeps the hero short. */
   @media (max-width: 63.99rem) {
+    .portrait-frame {
+      order: -1;
+      width: 5.5rem;
+      height: 5.5rem;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+    }
+
+    /* Zoom in on the face, which would be tiny in a small circle. sizes="9rem" covers the zoom. */
     .portrait {
-      display: none;
+      max-width: none;
+      height: 100%;
+      aspect-ratio: auto;
+      border: 0;
+      border-radius: 0;
+      object-position: 50% 30%;
+      transform: scale(1.5);
+      transform-origin: 50% 30%;
     }
   }
 
