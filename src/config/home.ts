@@ -7,7 +7,7 @@ export const hero = {
 };
 
 export const facts = [
-  { value: '10+', label: 'years building Hive, from support to senior engineer' },
+  { value: '10+', label: 'years building Hive, from software engineer to senior engineer' },
   { value: '740', label: 'pull requests merged to production since 2019' },
   { value: '106', label: 'peer recognitions from colleagues over nine years' },
 ];
