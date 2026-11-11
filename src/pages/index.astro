@@ -1,16 +1,17 @@
 ---
+import Hero from '@/components/home/Hero.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>David Cellini</title>
-	</head>
-	<body>
-		<h1>Hello World</h1>
-	</body>
-</html>
+<BaseLayout>
+  <Hero />
+
+  <!-- Placeholder until the case study viewer lands in phase 4. -->
+  <section id="work" class="shell" aria-labelledby="work-title">
+    <p class="eyebrow">Selected work</p>
+    <h2 id="work-title" class="mt-6 text-section">
+      Case studies
+    </h2>
+    <p class="mt-4 max-w-xl text-lead text-muted">Case studies are on their way.</p>
+  </section>
+</BaseLayout>

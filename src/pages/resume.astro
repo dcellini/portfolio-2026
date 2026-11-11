@@ -1,0 +1,101 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+import PageHero from '@/components/ui/PageHero.astro';
+import { resume } from '@/config/resume';
+import { siteConfig } from '@/config/site';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { profileSchema } from '@/lib/schema';
+---
+
+<BaseLayout
+  title="Resume"
+  description={`Resume of ${siteConfig.author.name}: senior full-stack engineer in Newcastle upon Tyne. Experience at Hive, Leighton and GMG Radio, plus skills across React, TypeScript, GraphQL and Node.js.`}
+  type="profile"
+  structuredData={profileSchema('/resume/')}
+>
+  <PageHero eyebrow={resume.eyebrow} title={resume.title} highlight={resume.highlight} text={resume.text}>
+    <div class="rise mt-8 flex flex-wrap gap-3" style="--rise-step: 3">
+      {siteConfig.resumePdf && (
+        <a class="btn btn-primary" href={siteConfig.resumePdf} download>
+          <Icon name="download" class="size-4" />
+          Download CV (PDF)
+        </a>
+      )}
+      <a
+        class:list={['btn', siteConfig.resumePdf ? 'btn-ghost' : 'btn-primary']}
+        href={`mailto:${siteConfig.author.email}`}
+      >
+        {siteConfig.author.email}
+        <Icon name="arrow-up-right" class="icon-nudge-diagonal size-4" />
+      </a>
+    </div>
+  </PageHero>
+
+  <div class="shell mt-20 sm:mt-28">
+    <section class="resume-row reveal" aria-labelledby="snapshot-title">
+      <h2 id="snapshot-title" class="eyebrow self-start">
+        Snapshot
+      </h2>
+      <dl class="grid gap-x-10 gap-y-6 sm:grid-cols-2">
+        {resume.snapshot.map((item) => (
+          <div>
+            <dt class="text-sm text-muted">{item.label}</dt>
+            <dd class="mt-1 text-lg font-medium">{item.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+
+    <section class="resume-row reveal" aria-labelledby="experience-title">
+      <h2 id="experience-title" class="eyebrow self-start">
+        Experience
+      </h2>
+      <ol class="grid gap-10">
+        {resume.experience.map((job) => (
+          <li class="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-x-8">
+            <h3 class="text-title">
+              {job.role}
+              <span class="text-muted">, {job.company}</span>
+            </h3>
+            <p class="text-sm text-muted sm:row-start-1 sm:col-start-2 sm:pt-1.5">{job.period}</p>
+            <p class="max-w-2xl text-body">{job.text}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="resume-row reveal" aria-labelledby="skills-title">
+      <h2 id="skills-title" class="eyebrow self-start">
+        Skills
+      </h2>
+      <div class="grid gap-8 sm:grid-cols-2">
+        {resume.skills.map((group) => (
+          <div>
+            <h3 class="font-semibold">{group.title}</h3>
+            <ul class="mt-3 flex flex-wrap gap-1.5">
+              {group.items.map((item) => (
+                <li class="chip">{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .resume-row {
+    display: grid;
+    gap: 1.5rem;
+    padding-block: 3rem;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (min-width: 64rem) {
+    .resume-row {
+      grid-template-columns: 16rem minmax(0, 1fr);
+      gap: 4rem;
+    }
+  }
+</style>

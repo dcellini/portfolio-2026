@@ -1,17 +1,41 @@
 {
   "name": "portfolio-2026",
+  "description": "David Cellini's portfolio, built with Astro on the Maria theme by Andrei Alba.",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "author": "David Cellini",
+  "license": "MIT",
+  "private": true,
   "engines": {
-    "node": ">=22.23.4"
+    "node": ">=22.12.0"
   },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "check": "astro check",
+    "release:check": "npm run check && npm run build && npm run format:check",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "overrides": {
+    "yaml": "^2.8.3"
   },
   "dependencies": {
-    "astro": "^7.4.8"
+    "@astrojs/mdx": "^8.1.0",
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "astro": "^7.4.1",
+    "sharp": "^0.35.5",
+    "tailwindcss": "^4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.11",
+    "@types/node": "^24.19.2",
+    "prettier": "^3.9.10",
+    "prettier-plugin-astro": "^1.1.1",
+    "typescript": "^5.9.3",
+    "vite": "^8.3.5"
   }
 }
