@@ -10,6 +10,13 @@ const person = {
   jobTitle: siteConfig.author.role,
   email: `mailto:${siteConfig.author.email}`,
   url: siteConfig.siteUrl,
+  image: absolute(siteConfig.socialImage),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Newcastle upon Tyne',
+    addressCountry: 'GB',
+  },
+  knowsAbout: ['React', 'TypeScript', 'GraphQL', 'Node.js', 'MongoDB', 'Accessibility (WCAG 2.2)'],
   sameAs: siteConfig.socials.map((social) => social.href),
 };
 
