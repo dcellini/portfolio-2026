@@ -27,9 +27,20 @@ const year = new Date().getFullYear();
         <p class="mt-6 max-w-xl text-lead text-night-muted">{closing.text}</p>
         <div class="mt-10 flex flex-wrap items-center gap-3">
           <a class="btn btn-accent" href={`mailto:${email}`}>
+            <Icon name="mail" class="size-4" />
             {email}
-            <Icon name="arrow-up-right" class="icon-nudge-diagonal size-4" />
           </a>
+          <button type="button" class="btn night-ghost copy-email" data-copy-email={email} data-needs-js>
+            <span class="copy-idle inline-flex items-center gap-2">
+              <Icon name="copy" class="size-4" />
+              Copy address
+            </span>
+            <span class="copy-done items-center gap-2" hidden>
+              <Icon name="check" class="size-4" />
+              Copied
+            </span>
+          </button>
+          <span class="sr-only" role="status" data-copy-status></span>
           {siteConfig.socials.map((social) => (
             <a class="btn night-ghost" href={social.href} rel="me noopener">
               <Icon name={socialIcon(social.label)} class="size-4" />
@@ -145,6 +156,15 @@ const year = new Date().getFullYear();
     border-color: var(--night-ink);
   }
 
+  .copy-email {
+    min-width: 10.5rem;
+  }
+
+  .copy-done:not([hidden]) {
+    display: inline-flex;
+    color: var(--night-accent);
+  }
+
   .closing-grid {
     position: absolute;
     inset: 0;
@@ -153,3 +173,51 @@ const year = new Date().getFullYear();
     mask-image: radial-gradient(ellipse 70% 90% at 100% 100%, #000 10%, transparent 70%);
   }
 </style>
+
+<script>
+  // Copies the email address and shows a tick for a moment. It can be clicked again at any time.
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-email]').forEach((button) => {
+    const idle = button.querySelector<HTMLElement>('.copy-idle')!;
+    const done = button.querySelector<HTMLElement>('.copy-done')!;
+    const status = document.querySelector<HTMLElement>('[data-copy-status]');
+    let timer: number | undefined;
+
+    const copy = async (text: string) => {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch {
+        // Fallback for browsers or contexts without the async clipboard API.
+        const field = Object.assign(document.createElement('textarea'), { value: text });
+        field.setAttribute('readonly', '');
+        field.style.position = 'fixed';
+        field.style.opacity = '0';
+        document.body.append(field);
+        field.select();
+        const ok = document.execCommand('copy');
+        field.remove();
+        return ok;
+      }
+    };
+
+    button.addEventListener('click', async () => {
+      const ok = await copy(button.dataset.copyEmail!);
+      if (status) status.textContent = '';
+      if (!ok) {
+        if (status) status.textContent = 'Copying failed. The address is ' + button.dataset.copyEmail;
+        return;
+      }
+      idle.hidden = true;
+      done.hidden = false;
+      // Clear then set, so screen readers announce it on every click.
+      requestAnimationFrame(() => {
+        if (status) status.textContent = 'Email address copied';
+      });
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        idle.hidden = false;
+        done.hidden = true;
+      }, 2000);
+    });
+  });
+</script>
