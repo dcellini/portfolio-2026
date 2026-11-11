@@ -25,28 +25,32 @@ const year = new Date().getFullYear();
           <span class="serif text-night-accent">{closing.highlight}</span>
         </h2>
         <p class="mt-6 max-w-xl text-lead text-night-muted">{closing.text}</p>
-        <div class="mt-10 flex flex-wrap items-center gap-3">
-          <a class="btn btn-accent" href={`mailto:${email}`}>
-            <Icon name="mail" class="size-4" />
-            {email}
-          </a>
-          <button type="button" class="btn night-ghost copy-email" data-copy-email={email} data-needs-js>
-            <span class="copy-idle inline-flex items-center gap-2">
-              <Icon name="copy" class="size-4" />
-              Copy address
-            </span>
-            <span class="copy-done items-center gap-2" hidden>
-              <Icon name="check" class="size-4" />
-              Copied
-            </span>
-          </button>
-          <span class="sr-only" role="status" data-copy-status></span>
-          {siteConfig.socials.map((social) => (
-            <a class="btn night-ghost" href={social.href} rel="me noopener">
-              <Icon name={socialIcon(social.label)} class="size-4" />
-              {social.label}
+        <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <div class="flex flex-wrap items-center gap-1">
+            <a class="btn btn-accent" href={`mailto:${email}`}>
+              <Icon name="mail" class="size-4" />
+              {email}
             </a>
-          ))}
+            <button type="button" class="btn copy-email" data-copy-email={email} data-needs-js>
+              <span class="copy-idle inline-flex items-center gap-2">
+                <Icon name="copy" class="size-4" />
+                Copy email
+              </span>
+              <span class="copy-done items-center gap-2" hidden>
+                <Icon name="check" class="size-4" />
+                Copied
+              </span>
+            </button>
+          </div>
+          <span class="sr-only" role="status" data-copy-status></span>
+          <div class="flex flex-wrap items-center gap-3">
+            {siteConfig.socials.map((social) => (
+              <a class="btn night-ghost" href={social.href} rel="me noopener">
+                <Icon name={socialIcon(social.label)} class="size-4" />
+                {social.label}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -156,8 +160,19 @@ const year = new Date().getFullYear();
     border-color: var(--night-ink);
   }
 
+  /* A quiet companion to the email button: no border, so it doesn't read as another link. */
   .copy-email {
-    min-width: 10.5rem;
+    min-width: 8.5rem;
+    padding-inline: 1rem;
+    color: var(--night-muted);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.25em;
+  }
+
+  .copy-email:hover {
+    color: var(--night-ink);
+    text-decoration-color: currentColor;
   }
 
   .copy-done:not([hidden]) {
