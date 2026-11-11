@@ -1,0 +1,62 @@
+---
+import SectionHead from '@/components/ui/SectionHead.astro';
+import { sections } from '@/config/home';
+import { timeline } from '@/data/career';
+---
+
+<section id="timeline" class="shell mt-24 sm:mt-32" aria-labelledby="timeline-title">
+  <SectionHead id="timeline-title" eyebrow={sections.timeline.eyebrow} title={sections.timeline.title} />
+  <ol class="timeline mt-12">
+    {timeline.map((entry) => (
+      <li class="timeline-item reveal">
+        <p class="text-sm font-medium text-muted">{entry.dates}</p>
+        <div>
+          <h3 class="text-title">
+            {entry.role}
+            <span class="text-muted"> · {entry.org}</span>
+          </h3>
+          {entry.note && <p class="mt-1 text-sm font-medium text-accent-ink">{entry.note}</p>}
+          <p class="mt-3 max-w-2xl text-body">{entry.text}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .timeline-item {
+    position: relative;
+    display: grid;
+    gap: 0.5rem;
+    padding-block: 1.75rem;
+    padding-inline-start: 1.75rem;
+    border-inline-start: 1px solid var(--line-strong);
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    top: 2.15rem;
+    inset-inline-start: calc(-0.3125rem - 0.5px);
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 999px;
+    background: var(--canvas);
+    box-shadow: inset 0 0 0 2px var(--accent);
+  }
+
+  .timeline-item:first-child::before {
+    background: var(--accent);
+  }
+
+  @media (min-width: 48rem) {
+    .timeline-item {
+      grid-template-columns: 9rem minmax(0, 1fr);
+      gap: 2rem;
+    }
+
+    .timeline-item > p:first-child {
+      padding-top: 0.3rem;
+    }
+  }
+</style>

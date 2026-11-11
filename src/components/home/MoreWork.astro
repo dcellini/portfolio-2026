@@ -1,0 +1,44 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+import SectionHead from '@/components/ui/SectionHead.astro';
+import { sections } from '@/config/home';
+import { getShortWork, projectHref } from '@/lib/work';
+
+const items = await getShortWork();
+---
+
+<section class="shell mt-24 sm:mt-32" aria-labelledby="more-work-title">
+  <SectionHead id="more-work-title" eyebrow={sections.moreWork.eyebrow} title={sections.moreWork.title} />
+  <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {items.map((item) => (
+      <li class="more-card reveal relative flex flex-col rounded-panel border border-line p-6">
+        <p class="text-sm text-muted">{item.data.dates}</p>
+        <h3 class="mt-2 text-lg font-semibold">
+          <a href={projectHref(item)} class="after:absolute after:inset-0 focus-visible:outline-none">
+            {item.data.title}
+          </a>
+        </h3>
+        <p class="mt-2 flex-1 text-body">{item.data.summary}</p>
+        <Icon name="arrow-right" class="icon-nudge mt-5 size-4 text-muted" />
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .more-card {
+    transition:
+      border-color 160ms ease,
+      background-color 160ms ease;
+  }
+
+  .more-card:hover {
+    border-color: var(--line-strong);
+    background: var(--surface);
+  }
+
+  .more-card:has(a:focus-visible) {
+    outline: 2px solid var(--ink);
+    outline-offset: 4px;
+  }
+</style>
