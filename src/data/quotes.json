@@ -122,5 +122,39 @@
     "text": "Thanks very much – we have the staff in, they are loving their individual pages. I've had a great response from them.",
     "role": "Customer",
     "org": "public-sector organisation"
+  },
+  {
+    "id": "heatmaps-summit",
+    "text": "Top work this sprint with manager access testing! A lot of hard work over the last few weeks has really helped drive the team towards the summit of Mount Heatmaps.",
+    "role": "Product Owner",
+    "org": "Hive",
+    "date": "November 2023"
+  },
+  {
+    "id": "heatmaps-college",
+    "text": "I have been obsessed with the heat maps and data it is a fantastic tool… It is very visual as well which helps to extract key messages.",
+    "role": "Customer",
+    "org": "further-education college"
+  },
+  {
+    "id": "question-bank-immense",
+    "text": "You've been absolutely immense throughout the entire Question Bank project. We can't sing your praises enough!",
+    "role": "Engineer",
+    "org": "Hive",
+    "date": "June 2025"
+  },
+  {
+    "id": "question-bank-rearchitect",
+    "text": "There's been so much work behind the scenes to completely re-architect how [demographic] questions were built which should help us massively in the long run when building new features!",
+    "role": "Deputy Head of Engineering",
+    "org": "Hive",
+    "date": "September 2025"
+  },
+  {
+    "id": "scheduled-eye",
+    "text": "Loving all your work on scheduled surveys recently. You have a really good eye for detail and spotting where the platform can be even better.",
+    "role": "Product Owner",
+    "org": "Hive",
+    "date": "February 2024"
   }
 ]

@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import { mdxComponents } from '@/components/mdx';
 import Icon from '@/components/ui/Icon.astro';
+import SkillChip from '@/components/ui/SkillChip.astro';
 import NextProject from '@/components/work/NextProject.astro';
 import StepDiagram from '@/components/work/StepDiagram.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
@@ -73,7 +74,7 @@ const meta = [
         {data.stack.length > 0 && (
           <ul class="mt-6 flex flex-wrap gap-1.5" aria-label="Tech stack">
             {data.stack.map((item) => (
-              <li class="chip">{item}</li>
+              <SkillChip name={item} />
             ))}
           </ul>
         )}

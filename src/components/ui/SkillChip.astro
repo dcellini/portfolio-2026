@@ -1,0 +1,73 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+import { skillIcon } from '@/lib/skill-icons';
+
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+const icon = skillIcon(name);
+---
+
+<li class="skill-chip">
+  {icon?.kind === 'brand' && (
+    <svg
+      class="skill-logo"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      style={`--brand: ${icon.hex}`}
+      data-on-light={icon.onLight || undefined}
+      data-on-dark={icon.onDark || undefined}
+    >
+      <path d={icon.path} fill="currentColor" />
+    </svg>
+  )}
+  {icon?.kind === 'generic' && <Icon name={icon.name} class="skill-generic size-3.5" />}
+  {name}
+</li>
+
+<style>
+  .skill-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2rem;
+    padding: 0.3rem 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--canvas);
+    color: var(--body);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.2;
+    transition: border-color 160ms ease;
+  }
+
+  .skill-chip:hover {
+    border-color: var(--line-strong);
+  }
+
+  .skill-logo {
+    flex: none;
+    width: 0.95rem;
+    height: 0.95rem;
+    color: var(--muted);
+  }
+
+  /* Brand colour only where it has 3:1 contrast against the chip in that theme. */
+  :global(:root:not(.dark)) .skill-logo[data-on-light],
+  :global(.dark) .skill-logo[data-on-dark] {
+    color: var(--brand);
+  }
+
+  .skill-chip :global(.skill-generic) {
+    color: var(--muted);
+  }
+
+  @media (forced-colors: active) {
+    .skill-logo {
+      color: CanvasText !important;
+    }
+  }
+</style>

@@ -6,6 +6,7 @@ title: Rebuilt heatmaps, and proved the numbers matched before anyone switched
 summary: A shared calculation library with Zod-validated contracts, a new GraphQL query and React UI, and a comparison script that proved parity before cut-over.
 dates: 2023 – 2024
 role: Led a team of 3
+scope: About 60 pull requests
 stack: [TypeScript, Zod, GraphQL, React, Node.js]
 headline:
   value: Back on
@@ -22,14 +23,15 @@ inPractice:
   - Led two other developers and gave progress updates in cross-department go-to-market meetings.
 result:
   - Replaced v1 for every customer. It's in use across all of Hive's ~200 customers.
-quotes: [heatmaps-slick, heatmaps-connecting, heatmaps-customer]
+  - "There's no tracked before-and-after timing. The clearest measure is a change of status: heatmaps had been switched off for one of Hive's largest customers, and they now run for them in production."
+quotes: [heatmaps-slick, heatmaps-connecting, heatmaps-summit, heatmaps-college, heatmaps-customer]
 ---
 
 ## The problem
 
 Heatmaps show survey scores by team, location and other attributes, with confidentiality rules hiding small groups.
 
-The original was hard to extend and slow with many filters. For one of Hive's largest customers, it had to be switched off entirely at their scale.
+The original was hard to extend and slow with many filters. For one of Hive's largest customers, the volume of responses and filters was too much: heatmaps had to be switched off for them entirely. Making them fast enough for that customer to use again was one of the key goals of the rebuild.
 
 ## What I did
 
@@ -39,3 +41,7 @@ The original was hard to extend and slow with many filters. For one of Hive's la
 - Logged old-vs-new differences and wrote a comparison script to prove parity before cut-over.
 - Stored attribute IDs instead of names to cut local storage size.
 - Led two other developers and gave progress updates in cross-department go-to-market meetings.
+
+### Why a shared library
+
+Putting the calculations in one library, with Zod checking every request and response, meant the service, the API and the comparison script all ran the same code. Any mismatch in shape failed loudly at the boundary instead of quietly producing a wrong number, which mattered for a feature people use to make decisions about teams.

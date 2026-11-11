@@ -23,9 +23,9 @@ inPractice:
   - Queued sends on AWS EventBridge, with a 30-second buffer so a last-second delete still clears the queue.
   - Admin reminder emails, and a migration moving existing surveys onto the new event model.
 result:
-  - Shipped and in production. Customers schedule their own surveys, and the support team's manual send queue is gone.
+  - Shipped and in production. Customers schedule their own surveys, and the support team's manual send queue is gone, freeing a significant part of their time.
   - It laid the groundwork for onboarding and exit surveys.
-quotes: [scheduled-workstream, scheduled-collaboration]
+quotes: [scheduled-workstream, scheduled-collaboration, scheduled-eye]
 ---
 
 ## The problem
@@ -38,7 +38,7 @@ It was also a stepping stone to onboarding and exit surveys, which needed survey
 
 ## What I did
 
-- A Schedule tab in the survey builder with start date, time and duration, plus a warning outside normal working hours.
+- A Schedule tab in the survey builder with start date, time and duration, plus a warning outside normal working hours. It replaced the old survey-close settings and layout.
 - An approval step and locking, so a scheduled survey can't be edited or deleted in the 5 minutes before it sends.
 - Queued sends on AWS EventBridge, with a 30-second buffer so a last-second delete still clears the queue.
 - A migration moving existing surveys onto the new event model.

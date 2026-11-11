@@ -32,7 +32,7 @@ The platform needed to meet WCAG 2.2 A and AA for public-sector and regulated cu
 ## What I did
 
 - Audited 97 pages against every A and AA success criterion as a single source of truth, with a consistency check against the issue tracker.
-- Traced most failures to shared components: ~450 failures became ~80 fixes in 23 themed PRs.
+- Traced most failures to shared components: ~450 failures became ~80 fixes in 23 themed PRs, grouped by theme (accessible names, keyboard and focus, reflow, motion) instead of one PR per page.
 - Split the work with a colleague, then moved to a shared priority queue.
 - Shipped fixes for:
   - Escape-to-dismiss (1.4.13), via a reusable hook in the design system
@@ -41,4 +41,9 @@ The platform needed to meet WCAG 2.2 A and AA for public-sector and regulated cu
   - input purpose (1.3.5)
   - motion (2.2.2)
   - accessible names (4.1.2)
-- Used Claude Code to build reusable reporting that regenerates burndown and status updates for leadership from the project's own tracking data.
+- Saved effort by testing a representative sample of pages for each fix instead of every page.
+- Used Claude Code to build reusable reporting that regenerates burndown and status updates for leadership from the project's own tracking data: a finish-line forecast, open decisions and remaining PRs. A status update became a few minutes' work instead of a manual report.
+
+### Why shared components first
+
+A page-by-page approach would have meant hundreds of small, repetitive fixes, each reviewed separately. Fixing the shared component once fixed every page that used it, kept reviews focused on one theme at a time, and made the remaining work easy to forecast.
