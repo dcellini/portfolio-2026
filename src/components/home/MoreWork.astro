@@ -7,7 +7,7 @@ import { getShortWork, projectHref } from '@/lib/work';
 const items = await getShortWork();
 ---
 
-<section class="shell mt-24 sm:mt-32" aria-labelledby="more-work-title">
+<section id="more-work" class="shell mt-24 sm:mt-32" aria-labelledby="more-work-title">
   <SectionHead id="more-work-title" eyebrow={sections.moreWork.eyebrow} title={sections.moreWork.title} />
   <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {items.map((item) => (
