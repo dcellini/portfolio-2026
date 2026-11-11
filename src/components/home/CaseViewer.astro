@@ -1,0 +1,305 @@
+---
+import SectionHead from '@/components/ui/SectionHead.astro';
+import Icon from '@/components/ui/Icon.astro';
+import StepDiagram from '@/components/work/StepDiagram.astro';
+import { sections } from '@/config/home';
+import { attribution, getCaseStudies, getQuotes, projectHref } from '@/lib/work';
+
+const caseStudies = await getCaseStudies();
+const panels = await Promise.all(
+  caseStudies.map(async (project) => ({ project, quote: (await getQuotes(project))[0] })),
+);
+const [first] = caseStudies;
+---
+
+<section id="work" class="shell mt-24 sm:mt-32" aria-labelledby="work-title">
+  <SectionHead id="work-title" eyebrow={sections.work.eyebrow} title={sections.work.title} />
+
+  <div class="viewer mt-12" data-case-viewer>
+    <nav class="viewer-nav" aria-label="Case studies">
+      <ul class="viewer-list" data-case-list>
+        {caseStudies.map((project) => (
+          <li>
+            <a
+              class="viewer-link"
+              href={projectHref(project)}
+              data-case-link={project.id}
+              aria-current={project.id === first.id ? 'true' : undefined}
+              aria-controls={`case-${project.id}`}
+            >
+              <span class="block font-semibold">{project.data.name}</span>
+              <span class="block text-sm text-muted">{project.data.dates}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="viewer-panels">
+      {panels.map(({ project, quote }) => {
+        const { data } = project;
+        return (
+          <article
+            id={`case-${project.id}`}
+            class="viewer-panel"
+            data-case-panel={project.id}
+            aria-labelledby={`case-${project.id}-title`}
+            hidden={project.id !== first.id}
+          >
+            <p class="text-sm text-muted">
+              {data.dates} · {data.role}
+            </p>
+            <h3 id={`case-${project.id}-title`} class="mt-3 max-w-[26ch] text-section" tabindex="-1">
+              {data.title}
+            </h3>
+
+            <div class="mt-8">
+              <StepDiagram steps={data.diagram} label={`How ${data.name} works`} />
+            </div>
+
+            <div class="mt-10 grid gap-10 xl:grid-cols-[minmax(0,15rem)_minmax(0,1fr)]">
+              <p class="flex flex-col gap-2">
+                <span class="text-headline leading-none whitespace-nowrap text-accent-ink">{data.headline.value}</span>
+                <span class="text-muted">{data.headline.label}</span>
+              </p>
+              <div>
+                <h4 class="text-sm font-semibold tracking-[0.08em] text-muted uppercase">In practice</h4>
+                <ul class="practice mt-4 grid gap-3">
+                  {data.inPractice.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {quote && (
+              <figure class="mt-10 border-l-2 border-accent pl-5">
+                <blockquote class="serif text-title text-ink">
+                  <p>“{quote.data.text}”</p>
+                </blockquote>
+                <figcaption class="mt-3 text-sm text-muted">{attribution(quote)}</figcaption>
+              </figure>
+            )}
+
+            <div class="mt-10 flex flex-wrap items-center justify-between gap-6 border-t border-line pt-6">
+              <ul class="flex flex-wrap gap-1.5" aria-label="Tech stack">
+                {data.stack.map((item) => (
+                  <li class="chip">{item}</li>
+                ))}
+              </ul>
+              <a class="btn btn-primary btn-sm" href={projectHref(project)}>
+                Read the full case study
+                <span class="sr-only">: {data.name}</span>
+                <Icon name="arrow-right" class="icon-nudge size-4" />
+              </a>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style>
+  .viewer {
+    display: grid;
+    /* minmax(0, …) stops the side-scrolling list from widening the page. */
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .viewer-list {
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    padding: 0.25rem;
+    margin: -0.25rem;
+    scroll-snap-type: x proximity;
+  }
+
+  .viewer-list > li {
+    flex: none;
+    scroll-snap-align: start;
+  }
+
+  .viewer-link {
+    display: block;
+    min-width: 11rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-panel);
+    color: var(--ink);
+    transition:
+      border-color 160ms ease,
+      background-color 160ms ease;
+  }
+
+  .viewer-link:hover {
+    border-color: var(--line-strong);
+    background: var(--surface);
+  }
+
+  .viewer-link[aria-current='true'] {
+    border-color: var(--accent);
+    background: var(--surface);
+    box-shadow: inset 3px 0 0 var(--accent);
+  }
+
+  .viewer-panel {
+    padding: 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    background: var(--canvas);
+  }
+
+  .viewer-panel h3:focus {
+    outline: none;
+  }
+
+  .viewer-panel h3:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 4px;
+  }
+
+  .practice > li {
+    position: relative;
+    padding-left: 1.25rem;
+    color: var(--body);
+  }
+
+  .practice > li::before {
+    content: '';
+    position: absolute;
+    top: 0.7em;
+    left: 0;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+
+  @media (min-width: 40rem) {
+    .viewer-panel {
+      padding: 2.5rem;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .viewer {
+      grid-template-columns: 16rem minmax(0, 1fr);
+      align-items: start;
+      gap: 2.5rem;
+    }
+
+    .viewer-nav {
+      position: sticky;
+      top: calc(var(--header-h) + 1.5rem);
+    }
+
+    .viewer-list {
+      flex-direction: column;
+      overflow: visible;
+      padding: 0;
+      margin: 0;
+    }
+
+    .viewer-link {
+      min-width: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .viewer-panel {
+      animation: panel-in 280ms var(--ease-out-expo);
+    }
+  }
+
+  @keyframes panel-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+  }
+</style>
+
+<script>
+  const viewer = document.querySelector<HTMLElement>('[data-case-viewer]');
+
+  if (viewer) {
+    const links = [...viewer.querySelectorAll<HTMLAnchorElement>('[data-case-link]')];
+    const panels = [...viewer.querySelectorAll<HTMLElement>('[data-case-panel]')];
+    const slugs = links.map((link) => link.dataset.caseLink!);
+    const fromUrl = () => new URL(location.href).searchParams.get('case');
+
+    const show = (slug: string, { focus = false } = {}) => {
+      panels.forEach((panel) => (panel.hidden = panel.dataset.casePanel !== slug));
+      links.forEach((link) =>
+        link.dataset.caseLink === slug
+          ? link.setAttribute('aria-current', 'true')
+          : link.removeAttribute('aria-current'),
+      );
+      // On phones the list scrolls sideways: keep the selected item in view without moving the page.
+      const list = viewer.querySelector<HTMLElement>('[data-case-list]');
+      const current = links.find((link) => link.dataset.caseLink === slug);
+      if (list && current && list.scrollWidth > list.clientWidth) {
+        list.scrollLeft += current.getBoundingClientRect().left - list.getBoundingClientRect().left - 4;
+      }
+      if (focus) viewer.querySelector<HTMLElement>(`#case-${slug}-title`)?.focus();
+    };
+
+    links.forEach((link) =>
+      link.addEventListener('click', (event) => {
+        // Let new-tab and new-window clicks open the full page as normal.
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        const slug = link.dataset.caseLink!;
+        if (slug !== fromUrl()) {
+          const url = new URL(location.href);
+          url.searchParams.set('case', slug);
+          url.hash = '';
+          history.pushState({ case: slug }, '', url);
+        }
+        show(slug, { focus: true });
+      }),
+    );
+
+    // Arrow keys (and Home/End) move between list items; Enter opens one.
+    viewer.querySelector('[data-case-list]')?.addEventListener('keydown', (event) => {
+      const { key } = event as KeyboardEvent;
+      const index = links.indexOf(document.activeElement as HTMLAnchorElement);
+      if (index === -1) return;
+      const last = links.length - 1;
+      const next =
+        key === 'ArrowDown' || key === 'ArrowRight'
+          ? Math.min(index + 1, last)
+          : key === 'ArrowUp' || key === 'ArrowLeft'
+            ? Math.max(index - 1, 0)
+            : key === 'Home'
+              ? 0
+              : key === 'End'
+                ? last
+                : -1;
+      if (next === -1) return;
+      event.preventDefault();
+      links[next].focus();
+    });
+
+    // Back and Forward restore the case study in the URL, or the first one.
+    addEventListener('popstate', () => {
+      const slug = fromUrl();
+      show(slug && slugs.includes(slug) ? slug : slugs[0]);
+    });
+
+    // A shared ?case= link preselects that case study and brings it into view.
+    const initial = fromUrl();
+    if (initial && slugs.includes(initial)) {
+      show(initial);
+      if (!location.hash) {
+        // After layout, and instant, so smooth scrolling and scroll restoration don't undo it.
+        requestAnimationFrame(() =>
+          document.getElementById('work')?.scrollIntoView({ behavior: 'instant', block: 'start' }),
+        );
+      }
+    }
+  }
+</script>

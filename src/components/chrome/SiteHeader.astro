@@ -10,13 +10,16 @@ const current = (href: string) => (path === href ? 'page' : path.startsWith(href
 
 <header class="site-header sticky top-0 z-40 h-(--header-h) border-b border-transparent bg-canvas">
   <div class="shell flex h-full items-center gap-4">
-    <a href="/" class="flex items-center gap-2.5 rounded-lg text-[1.15rem] font-semibold tracking-[-0.03em]">
+    <a
+      href="/"
+      class="flex items-center gap-2.5 rounded-lg whitespace-nowrap text-[1.15rem] font-semibold tracking-[-0.03em]"
+    >
       <Logomark />
       <span>{siteConfig.name}</span>
       <span class="sr-only">, home</span>
     </a>
 
-    <nav aria-label="Main" class="ml-auto hidden md:block">
+    <nav aria-label="Main" class="ml-auto hidden lg:block">
       <ul class="flex items-center gap-1">
         {navigation.map((link) => (
           <li>
@@ -28,14 +31,14 @@ const current = (href: string) => (path === href ? 'page' : path.startsWith(href
       </ul>
     </nav>
 
-    <div class="ml-auto flex items-center gap-1.5 md:ml-2">
+    <div class="ml-auto flex items-center gap-1.5 lg:ml-2">
       <ThemeToggle />
       <a class="btn btn-primary btn-sm ml-1 hidden sm:inline-flex" href={siteConfig.action.href}>
         {siteConfig.action.label}
       </a>
       <button
         type="button"
-        class="grid size-10 place-items-center rounded-full hover:bg-sunken md:hidden"
+        class="grid size-10 place-items-center rounded-full hover:bg-sunken lg:hidden"
         commandfor="mobile-nav"
         command="show-modal"
         aria-haspopup="dialog"
@@ -46,7 +49,7 @@ const current = (href: string) => (path === href ? 'page' : path.startsWith(href
     </div>
   </div>
 
-  <dialog id="mobile-nav" aria-label="Menu" class="mobile-nav md:hidden">
+  <dialog id="mobile-nav" aria-label="Menu" class="mobile-nav lg:hidden">
     <div class="shell flex h-(--header-h) items-center justify-between">
       <a href="/" class="flex items-center gap-2.5 text-[1.15rem] font-semibold tracking-[-0.03em]">
         <Logomark />
@@ -101,7 +104,7 @@ const current = (href: string) => (path === href ? 'page' : path.startsWith(href
   menu?.addEventListener('click', (event) => {
     if ((event.target as Element).closest('a')) menu.close();
   });
-  matchMedia('(min-width: 48rem)').addEventListener('change', (event) => event.matches && menu?.close());
+  matchMedia('(min-width: 64rem)').addEventListener('change', (event) => event.matches && menu?.close());
 </script>
 
 <style>

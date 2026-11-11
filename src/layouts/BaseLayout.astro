@@ -131,6 +131,19 @@ const schema = structuredData ?? websiteSchema();
         });
       })();
     </script>
+    {siteConfig.analyticsToken && <script
+      is:inline
+      define:vars={{ token: siteConfig.analyticsToken, host: siteConfig.analyticsHost }}
+    >
+      // Cookieless Cloudflare Web Analytics, on the production domain only.
+      if (location.hostname === host) {
+        const beacon = document.createElement('script');
+        beacon.defer = true;
+        beacon.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+        beacon.dataset.cfBeacon = JSON.stringify({ token });
+        document.head.append(beacon);
+      }
+    </script>}
     <noscript>
       <style>
         [data-needs-js] {

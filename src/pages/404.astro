@@ -1,6 +1,5 @@
 ---
 import Icon from '@/components/ui/Icon.astro';
-import { navigation } from '@/config/site';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 ---
 
@@ -24,11 +23,12 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
           <Icon name="arrow-left" class="size-4" />
           Back home
         </a>
-        {navigation.map((link) => (
-          <a class="btn btn-ghost" href={link.href}>
-            {link.label}
-          </a>
-        ))}
+        <a class="btn btn-ghost" href="/#work">
+          Case studies
+        </a>
+        <a class="btn btn-ghost" href="/resume/">
+          Resume
+        </a>
       </div>
     </div>
   </section>

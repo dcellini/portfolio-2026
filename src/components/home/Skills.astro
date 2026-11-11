@@ -1,0 +1,21 @@
+---
+import SectionHead from '@/components/ui/SectionHead.astro';
+import { sections } from '@/config/home';
+import { skills } from '@/data/skills';
+---
+
+<section id="skills" class="shell mt-24 sm:mt-32" aria-labelledby="skills-title">
+  <SectionHead id="skills-title" eyebrow={sections.skills.eyebrow} title={sections.skills.title} />
+  <div class="mt-12 grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2">
+    {skills.map((group) => (
+      <div class="bg-surface p-6 sm:p-8">
+        <h3 class="font-semibold">{group.title}</h3>
+        <ul class="mt-4 flex flex-wrap gap-1.5">
+          {group.items.map((item) => (
+            <li class="chip">{item}</li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>

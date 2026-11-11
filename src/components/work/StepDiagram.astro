@@ -1,0 +1,99 @@
+---
+interface Props {
+  steps: string[];
+  /** Accessible name for the diagram, e.g. "How Scheduled Surveys works". */
+  label: string;
+  /** Lay the steps out in a column at every width (for narrow containers). */
+  stacked?: boolean;
+}
+
+const { steps, label, stacked = false } = Astro.props;
+---
+
+<ol class:list={['steps', stacked && 'steps-stacked']} aria-label={label}>
+  {steps.map((step, index) => (
+    <li class="step">
+      <span class="step-number" aria-hidden="true">
+        {index + 1}
+      </span>
+      <span>{step}</span>
+    </li>
+  ))}
+</ol>
+
+<style>
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .step {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-panel);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .step-number {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  /* Down arrow between steps. */
+  .step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: calc(100% + 0.45rem);
+    left: 1.75rem;
+    width: 0.85rem;
+    height: 0.85rem;
+    border-right: 2px solid var(--line-strong);
+    border-bottom: 2px solid var(--line-strong);
+    transform: rotate(45deg);
+    transform-origin: center;
+  }
+
+  @media (min-width: 64rem) {
+    .steps:not(.steps-stacked) {
+      flex-direction: row;
+      align-items: stretch;
+      gap: 1.75rem;
+    }
+
+    .steps:not(.steps-stacked) .step {
+      flex: 1 1 0;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    /* Right arrow between steps. */
+    .steps:not(.steps-stacked) .step:not(:last-child)::after {
+      top: 50%;
+      left: calc(100% + 0.35rem);
+      transform: translateY(-50%) rotate(-45deg);
+    }
+  }
+
+  @media (forced-colors: active) {
+    .step-number {
+      border: 1px solid CanvasText;
+    }
+  }
+</style>

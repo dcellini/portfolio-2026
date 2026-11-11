@@ -46,3 +46,6 @@ CLAUDE.md
 
 # Private build brief (never commit)
 .brief.md
+
+# Lighthouse CI reports
+.lighthouseci/
