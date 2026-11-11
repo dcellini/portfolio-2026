@@ -38,6 +38,7 @@ export const skills: SkillGroup[] = [
     title: 'Cloud, delivery and testing',
     items: [
       'AWS Lambda',
+      'Amazon EventBridge',
       'Amazon S3',
       'Amazon SNS',
       'Amazon SQS',
