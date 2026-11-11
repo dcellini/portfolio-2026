@@ -3,6 +3,7 @@ import {
   siApollographql,
   siBuildkite,
   siClaude,
+  siCss,
   siDocker,
   siElasticsearch,
   siExpress,
@@ -10,14 +11,18 @@ import {
   siGithubactions,
   siGithubcopilot,
   siGraphql,
+  siHandlebarsdotjs,
   siHtml5,
   siJavascript,
   siMongodb,
+  siMongoose,
   siNodedotjs,
   siOpenapiinitiative,
   siPnpm,
+  siPython,
   siReact,
   siReactivex,
+  siR,
   siRedux,
   siSass,
   siSentry,
@@ -57,6 +62,14 @@ const brand: Record<string, SimpleIcon> = {
   'Claude Code': siClaude,
   'Anthropic API': siAnthropic,
   'GitHub Copilot': siGithubcopilot,
+  // Names used in case study stacks.
+  Redux: siRedux,
+  CSS: siCss,
+  Mongoose: siMongoose,
+  'MongoDB Atlas Search': siMongodb,
+  Handlebars: siHandlebarsdotjs,
+  Python: siPython,
+  R: siR,
 };
 
 /** Generic Lucide icons for skills without a usable brand logo (AWS logos aren't in Simple Icons). */
@@ -71,6 +84,10 @@ const generic: Record<string, string> = {
   'Amazon Bedrock': 'cloud',
   'WCAG 2.2': 'accessibility',
   'Design systems': 'layers',
+  'Design system': 'layers',
+  'AWS EventBridge': 'cloud',
+  i18n: 'languages',
+  'react-intl': 'languages',
 };
 
 const luminance = (hex: string) => {

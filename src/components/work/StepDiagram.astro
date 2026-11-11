@@ -1,22 +1,30 @@
 ---
+type Step = string | { title: string; detail?: string };
+
 interface Props {
-  steps: string[];
+  steps: Step[];
   /** Accessible name for the diagram, e.g. "How Scheduled Surveys works". */
   label: string;
   /** Lay the steps out in a column at every width (for narrow containers). */
   stacked?: boolean;
+  /** Show each step's detail line (full pages); the homepage viewer shows titles only. */
+  details?: boolean;
 }
 
-const { steps, label, stacked = false } = Astro.props;
+const { steps, label, stacked = false, details = false } = Astro.props;
+const items = steps.map((step) => (typeof step === 'string' ? { title: step, detail: undefined } : step));
 ---
 
-<ol class:list={['steps', stacked && 'steps-stacked']} aria-label={label}>
-  {steps.map((step, index) => (
+<ol class:list={['steps', stacked && 'steps-stacked', details && 'steps-detailed']} aria-label={label}>
+  {items.map((step, index) => (
     <li class="step">
       <span class="step-number" aria-hidden="true">
         {index + 1}
       </span>
-      <span>{step}</span>
+      <span class="step-body">
+        <span class="step-title">{step.title}</span>
+        {details && step.detail && <span class="step-detail">{step.detail}</span>}
+      </span>
     </li>
   ))}
 </ol>
@@ -43,6 +51,27 @@ const { steps, label, stacked = false } = Astro.props;
     line-height: 1.35;
   }
 
+  .step-body {
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .step-detail {
+    color: var(--body);
+    font-size: 0.9rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .steps-detailed .step {
+    align-items: flex-start;
+    padding: 1rem 1.25rem;
+  }
+
+  .steps-detailed .step-number {
+    margin-top: 0.05rem;
+  }
+
   .step-number {
     display: grid;
     flex: none;
@@ -56,17 +85,17 @@ const { steps, label, stacked = false } = Astro.props;
     font-weight: 600;
   }
 
-  /* Down arrow between steps. */
+  /* Down arrow between steps, centred under each box. */
   .step:not(:last-child)::after {
     content: '';
     position: absolute;
     top: calc(100% + 0.45rem);
-    left: 1.75rem;
+    left: 50%;
     width: 0.85rem;
     height: 0.85rem;
     border-right: 2px solid var(--line-strong);
     border-bottom: 2px solid var(--line-strong);
-    transform: rotate(45deg);
+    transform: translateX(-50%) rotate(45deg);
     transform-origin: center;
   }
 
@@ -83,7 +112,7 @@ const { steps, label, stacked = false } = Astro.props;
       align-items: flex-start;
     }
 
-    /* Right arrow between steps. */
+    /* Right arrow between steps, centred on each box. */
     .steps:not(.steps-stacked) .step:not(:last-child)::after {
       top: 50%;
       left: calc(100% + 0.35rem);

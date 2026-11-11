@@ -3,7 +3,7 @@ import Icon from '@/components/ui/Icon.astro';
 import SectionHead from '@/components/ui/SectionHead.astro';
 import { sections } from '@/config/home';
 import { skills } from '@/data/skills';
-import { skillIcon } from '@/lib/skill-icons';
+import SkillChip from '@/components/ui/SkillChip.astro';
 
 /** A Lucide icon for each group heading, in the order of `skills`. */
 const groupIcons = ['monitor-smartphone', 'database', 'cloud', 'sparkles'];
@@ -21,27 +21,9 @@ const groupIcons = ['monitor-smartphone', 'database', 'cloud', 'sparkles'];
           {group.title}
         </h3>
         <ul class="mt-5 flex flex-wrap gap-2">
-          {group.items.map((item) => {
-            const icon = skillIcon(item);
-            return (
-              <li class="skill-chip">
-                {icon?.kind === 'brand' && (
-                  <svg
-                    class="skill-logo"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                    style={`--brand: ${icon.hex}`}
-                    data-on-light={icon.onLight || undefined}
-                    data-on-dark={icon.onDark || undefined}
-                  >
-                    <path d={icon.path} fill="currentColor" />
-                  </svg>
-                )}
-                {icon?.kind === 'generic' && <Icon name={icon.name} class="skill-generic size-3.5" />}
-                {item}
-              </li>
-            );
-          })}
+          {group.items.map((item) => (
+            <SkillChip name={item} />
+          ))}
         </ul>
       </div>
     ))}
@@ -57,48 +39,5 @@ const groupIcons = ['monitor-smartphone', 'database', 'cloud', 'sparkles'];
     border-radius: 0.75rem;
     background: color-mix(in oklab, var(--accent) 14%, var(--surface));
     color: var(--accent-ink);
-  }
-
-  .skill-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    min-height: 2rem;
-    padding: 0.3rem 0.75rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: var(--canvas);
-    color: var(--body);
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1.2;
-    transition: border-color 160ms ease;
-  }
-
-  .skill-chip:hover {
-    border-color: var(--line-strong);
-  }
-
-  .skill-logo {
-    flex: none;
-    width: 0.95rem;
-    height: 0.95rem;
-    color: var(--muted);
-  }
-
-  /* Brand colour only where it has 3:1 contrast in that theme. */
-  :global(:root:not(.dark)) .skill-logo[data-on-light],
-  :global(.dark) .skill-logo[data-on-dark] {
-    color: var(--brand);
-  }
-
-  .skill-chip :global(.skill-generic) {
-    color: var(--muted);
-  }
-
-  @media (forced-colors: active) {
-    .skill-logo {
-      color: CanvasText !important;
-    }
   }
 </style>

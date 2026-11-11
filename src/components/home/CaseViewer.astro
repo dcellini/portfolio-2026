@@ -1,6 +1,7 @@
 ---
 import SectionHead from '@/components/ui/SectionHead.astro';
 import Icon from '@/components/ui/Icon.astro';
+import SkillChip from '@/components/ui/SkillChip.astro';
 import StepDiagram from '@/components/work/StepDiagram.astro';
 import { sections } from '@/config/home';
 import { attribution, getCaseStudies, getQuotes, projectHref } from '@/lib/work';
@@ -84,7 +85,7 @@ const [first] = caseStudies;
             <div class="mt-10 flex flex-wrap items-center justify-between gap-6 border-t border-line pt-6">
               <ul class="flex flex-wrap gap-1.5" aria-label="Tech stack">
                 {data.stack.map((item) => (
-                  <li class="chip">{item}</li>
+                  <SkillChip name={item} />
                 ))}
               </ul>
               <a class="btn btn-primary btn-sm" href={projectHref(project)}>

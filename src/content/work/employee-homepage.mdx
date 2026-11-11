@@ -12,10 +12,14 @@ headline:
   value: 43%
   label: of one customer's survey responses came through the new homepage
 diagram:
-  - Recognitions in MongoDB
-  - Atlas Search endpoint
-  - GraphQL query
-  - Homepage feed and navigation
+  - title: 'Recognitions in MongoDB'
+    detail: 'Recognitions given and received, which employees could previously only reach through email.'
+  - title: 'Atlas Search endpoint'
+    detail: 'A new endpoint queries recognitions with MongoDB Atlas Search.'
+  - title: 'GraphQL query'
+    detail: "Serves the feed, including the recognitions you've sent."
+  - title: 'Homepage feed and navigation'
+    detail: 'Replaces the old homepage block, rolled out incrementally behind a feature flag.'
 inPractice:
   - Built a recognitions endpoint on MongoDB Atlas Search and the GraphQL query behind it.
   - Added a feed of the recognitions you've sent, not just the ones you've received.

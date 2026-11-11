@@ -12,20 +12,24 @@ headline:
   value: ~10k
   label: lines of legacy code removed once the migration was done
 diagram:
-  - Questions copied into every survey
-  - One bank per organisation
-  - Translated automatically
-  - Unlocked Custom Indexes and 360 Surveys
+  - title: 'Questions copied into every survey'
+    detail: 'Admins rebuilt the same questions again and again, and translations drifted.'
+  - title: 'One bank per organisation'
+    detail: 'A MongoDB model using Mongoose discriminators, plus global questions shared by everyone.'
+  - title: 'Translated automatically'
+    detail: 'Machine translation fills only empty languages, so human translations are never overwritten.'
+  - title: 'Unlocked Custom Indexes and 360 Surveys'
+    detail: 'Along with benchmarking on custom questions.'
 inPractice:
   - A per-organisation MongoDB model using Mongoose discriminators, plus global questions shared by everyone.
   - Machine translation that only fills empty languages, so human translations are never overwritten.
   - Migrated the legacy demographic questions in, with old and new formats running side by side during rollout.
   - Deleted the old code paths once the migration was done.
 result:
-  - Unlocked Custom Indexes, 360 Surveys and benchmarking on custom questions.
+  - Unlocked Custom Indexes, 360 Surveys and benchmarking on custom questions. The 360 Surveys release relies on the standard demographic questions being inserted automatically.
   - In use across ~200 customers.
   - Freed the support team from handling these translations and edits by hand.
-quotes: [question-bank-finished, question-bank-translated, bloom]
+quotes: [question-bank-finished, question-bank-translated, question-bank-immense, question-bank-rearchitect, bloom]
 ---
 
 ## The problem
@@ -34,10 +38,12 @@ Questions lived inside each survey, so admins rebuilt the same questions repeate
 
 Demographic questions used an older, separate model that reports depended on. Customers couldn't translate or edit those questions themselves: it all went through Support, often with Engineering. A customer running 21 languages across 10 such questions could need over 1,000 translations handled that way.
 
+Customers couldn't edit a demographic question at all once it was created, so a routine yearly update, such as changing a question's options, meant rebuilding it or asking Support. The questions also needed bringing up to date with current accessibility and inclusion practice.
+
 ## What I did
 
 - A per-organisation MongoDB model using Mongoose discriminators, plus global questions shared by everyone.
 - GraphQL create, update, archive and delete, and a React editor tuned to avoid needless re-renders.
 - Machine translation that only fills empty languages, so human translations are never overwritten.
-- Migrated the legacy demographic questions in, with old and new formats running side by side during rollout, then deleted the old code paths (~10k lines).
+- Migrated the legacy demographic questions in, rewrote historic survey components to the new shape, and kept old and new formats running side by side during rollout, then deleted the old code paths (~10k lines).
 - Added an index once real data showed a lookup was slow.
