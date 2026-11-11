@@ -13,6 +13,10 @@ npm run check    # type check
 npm run build    # static site in dist/
 ```
 
+## CI
+
+`.github/workflows/ci.yml` runs on every pull request and push to `master`: `npm ci`, type check, formatting, build, then Lighthouse CI (`lighthouserc.json`) on the homepage and one case study. It fails below 90 for performance and best practices, 95 for SEO and 100 for accessibility.
+
 ## Deploy
 
 Cloudflare Workers Builds deploys every push to `master` to https://davidcellini.co.uk. Other branches get preview URLs.
