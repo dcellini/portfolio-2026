@@ -54,8 +54,8 @@ const work = defineCollection({
       scope: z.string().optional(),
       /** The one headline figure in the viewer panel. */
       headline: z.object({ value: z.string(), label: z.string() }),
-      /** Steps for the "How it works" diagram, in order. */
-      diagram: z.array(z.string()).min(3),
+      /** Steps for the "How it works" diagram, in order. `detail` shows on the full page only. */
+      diagram: z.array(z.union([z.string(), z.object({ title: z.string(), detail: z.string().optional() })])).min(3),
       /** 3-5 "In practice" bullets for the viewer panel. */
       inPractice: z.array(z.string()).min(3).max(5),
       /** "The result" section, one paragraph or bullet per item. */

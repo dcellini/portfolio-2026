@@ -12,10 +12,14 @@ headline:
   value: ~200
   label: customer organisations with onboarding and exit surveys enabled
 diagram:
-  - Builder assumed eNPS
-  - Builder made metric-neutral
-  - Onboarding and Exit Indexes added
-  - Continuous, confidential surveys
+  - title: 'Builder assumed eNPS'
+    detail: 'The metric component, review tab and key driver analysis were hard-coded for eNPS and the Engagement Index.'
+  - title: 'Builder made metric-neutral'
+    detail: 'Refactored so any new metric plugs in without bespoke code.'
+  - title: 'Onboarding and Exit Indexes added'
+    detail: 'New survey types and question categories, released behind a feature flag and a create permission.'
+  - title: 'Continuous, confidential surveys'
+    detail: 'No closing date, and per-survey confidentiality enforced across search, heatmaps and CSV exports.'
 inPractice:
   - Added Onboarding and Exit survey types, released behind a feature flag and a create permission.
   - Per-survey confidentiality limits, including turning confidentiality off, enforced the same way in search, heatmaps and CSV exports.

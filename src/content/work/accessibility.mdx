@@ -11,10 +11,14 @@ headline:
   value: 450 → 80
   label: failures, once traced back to shared components
 diagram:
-  - 97 pages audited
-  - ~450 failures found
-  - Traced to shared components
-  - ~80 fixes in 23 themed PRs
+  - title: '97 pages audited'
+    detail: 'Every page checked against every A and AA success criterion.'
+  - title: '~450 failures found'
+    detail: 'Kept in one matrix as the single source of truth, checked against the issue tracker.'
+  - title: 'Traced to shared components'
+    detail: 'Most failures came from components shared across many pages.'
+  - title: '~80 fixes in 23 themed PRs'
+    detail: 'Grouped by theme: accessible names, keyboard and focus, reflow and motion.'
 inPractice:
   - Audited 97 pages against every A and AA success criterion, with a consistency check against the issue tracker.
   - Traced most failures to shared components, so ~450 failures became ~80 fixes in 23 themed PRs.

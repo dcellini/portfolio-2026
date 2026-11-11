@@ -12,10 +12,14 @@ headline:
   value: ~10k
   label: lines of legacy code removed once the migration was done
 diagram:
-  - Questions copied into every survey
-  - One bank per organisation
-  - Translated automatically
-  - Unlocked Custom Indexes and 360 Surveys
+  - title: 'Questions copied into every survey'
+    detail: 'Admins rebuilt the same questions again and again, and translations drifted.'
+  - title: 'One bank per organisation'
+    detail: 'A MongoDB model using Mongoose discriminators, plus global questions shared by everyone.'
+  - title: 'Translated automatically'
+    detail: 'Machine translation fills only empty languages, so human translations are never overwritten.'
+  - title: 'Unlocked Custom Indexes and 360 Surveys'
+    detail: 'Along with benchmarking on custom questions.'
 inPractice:
   - A per-organisation MongoDB model using Mongoose discriminators, plus global questions shared by everyone.
   - Machine translation that only fills empty languages, so human translations are never overwritten.

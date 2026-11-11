@@ -12,10 +12,14 @@ headline:
   value: Back on
   label: for one of Hive's largest customers, after v1 had to be switched off for them
 diagram:
-  - Shared calculation library
-  - Survey service
-  - GraphQL API
-  - New React UI
+  - title: 'Shared calculation library'
+    detail: 'One calculation engine, with Zod-validated request and response contracts.'
+  - title: 'Survey service'
+    detail: 'Runs the library and logs any difference from v1, so parity could be proved before cut-over.'
+  - title: 'GraphQL API'
+    detail: 'A new query exposes the results to the frontend.'
+  - title: 'New React UI'
+    detail: 'The page, filters and table, with average and response-rate rows, plus CSV and image export.'
 inPractice:
   - Extracted the calculation engine into a shared library with Zod-validated request and response contracts.
   - Exposed it through a new GraphQL query, then built the React page, filters and table.

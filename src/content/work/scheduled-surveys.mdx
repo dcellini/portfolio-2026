@@ -12,11 +12,16 @@ headline:
   value: '0'
   label: surveys Support now sends by hand for customers
 diagram:
-  - Admin picks a date
-  - Approved and queued
-  - Reminder email
-  - Edits lock 5 minutes before
-  - EventBridge sends on time
+  - title: 'Admin picks a date'
+    detail: 'A new Schedule tab sets the start date, time and duration, with a warning outside working hours.'
+  - title: 'Approved and queued'
+    detail: 'An approval step queues the send on AWS EventBridge, with a 30-second buffer so a late delete still clears it.'
+  - title: 'Reminder email'
+    detail: 'Admins get a reminder 48 hours before, or 1 hour before for surveys that run 2 hours or less.'
+  - title: 'Edits lock 5 minutes before'
+    detail: "The survey can't be edited or deleted in the final 5 minutes before it sends."
+  - title: 'EventBridge sends on time'
+    detail: 'The survey goes out on the chosen date, with nobody needing to log in.'
 inPractice:
   - A Schedule tab with start date, time and duration, plus a warning outside normal working hours.
   - An approval step, and locking so a scheduled survey can't be changed in the 5 minutes before it sends.
