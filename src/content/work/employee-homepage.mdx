@@ -1,13 +1,48 @@
 ---
-kind: short
-order: 10
+kind: full
+order: 5
 name: Employee homepage
-title: Employee homepage and recognitions feed
-summary: One customer saw 43% of survey responses come through it, helping them reach a 68% response rate.
-dates: 2025 – 2026
-stack: [MongoDB Atlas Search, GraphQL]
+title: Gave employees one place to see their recognitions, instead of hunting through email
+summary: A rebuilt employee homepage with a recognitions feed on MongoDB Atlas Search, new navigation, and a feed of the recognitions you've sent as well as received.
+dates: Nov 2025 – Jan 2026
+role: Sole engineer
+scope: About 15 pull requests
+stack: [MongoDB Atlas Search, GraphQL, React, i18n]
+headline:
+  value: 43%
+  label: of one customer's survey responses came through the new homepage
+diagram:
+  - Recognitions in MongoDB
+  - Atlas Search endpoint
+  - GraphQL query
+  - Homepage feed and navigation
+inPractice:
+  - Built a recognitions endpoint on MongoDB Atlas Search and the GraphQL query behind it.
+  - Added a feed of the recognitions you've sent, not just the ones you've received.
+  - Replaced the old homepage block with new navigation and a recognitions feed, and refactored the employee header.
+  - Hid empty survey blocks, translated the empty states and fixed an error-handling redirect.
+result:
+  - One customer saw 43% of survey responses arrive through the homepage, helping them reach a 68% response rate after worrying about response rates before launch.
+  - A customer with a van-based workforce found it "so much easier" than logging on to a shared machine to find an email.
+  - A public-sector customer shared positive feedback from staff while renewing their contract.
+quotes: [homepage-customer]
 ---
 
-I rebuilt the employee homepage around a recognitions feed on MongoDB Atlas Search, with a new GraphQL endpoint and navigation.
+## The problem
 
-One customer saw 43% of survey responses arrive through it, helping them reach a 68% response rate.
+Employees relied on email to do almost anything on Hive: submitting a survey, sending feedback or giving recognition all started with finding the right email. Those emails were easily deleted and arrived irregularly, and employees without an email address had no way in at all.
+
+On recognition, employees could only see the recognitions they'd received, never the ones they'd given.
+
+The plan was a single, always-on homepage for employees, starting with a recognition board showing both given and received as the foundation for a broader employee dashboard.
+
+## What I did
+
+- Added a block to the employee homepage with simple menu items linking to recognition features.
+- Built a new recognitions endpoint on MongoDB Atlas Search and the GraphQL query behind it.
+- Added a feed page for the recognitions you've sent.
+- Fixed the sent-recognition update mutation and simplified the list endpoint.
+- Hid the surveys block entirely when an employee has no surveys to complete.
+- Replaced the old block with new homepage navigation and a recognitions feed, then refactored the employee header and retired the old block, released incrementally behind a feature flag.
+- Added a user settings menu to the homepage.
+- Translated the empty-state messages and fixed a redirect when validation failed.
