@@ -1,19 +1,20 @@
 ---
-import { getImage, Image } from 'astro:assets';
 import { render } from 'astro:content';
 import { mdxComponents } from '@/components/mdx';
 import Icon from '@/components/ui/Icon.astro';
 import NextProject from '@/components/work/NextProject.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { caseStudySchema } from '@/lib/schema';
-import { getProjects, type Project } from '@/lib/work';
+import { attribution, getProjects, getQuotes, type Project } from '@/lib/work';
 
 export async function getStaticPaths() {
   const projects = await getProjects();
-  return projects.map((project, index) => ({
-    params: { slug: project.id },
-    props: { project, next: projects[(index + 1) % projects.length] },
-  }));
+  return projects.map((project) => {
+    // "Next" stays within the same kind: case study to case study, short page to short page.
+    const siblings = projects.filter((p) => p.data.kind === project.data.kind);
+    const next = siblings[(siblings.indexOf(project) + 1) % siblings.length];
+    return { params: { slug: project.id }, props: { project, next } };
+  });
 }
 
 interface Props {
@@ -22,95 +23,89 @@ interface Props {
 }
 
 const { project, next } = Astro.props;
-const { title, client, summary, year, role, services, duration, team, cover, coverAlt, tint, url } = project.data;
+const { data } = project;
 const { Content } = await render(project);
-const share = await getImage({ src: cover, width: 1200, height: 630, fit: 'cover', position: 'top', format: 'png' });
+const quotes = await getQuotes(project);
 
 const meta = [
-  { label: 'Client', value: client },
-  { label: 'Year', value: String(year) },
-  { label: 'Role', value: role },
-  duration && { label: 'Duration', value: duration },
-  team && { label: 'Team', value: team },
+  { label: 'Dates', value: data.dates },
+  data.role && { label: 'Role', value: data.role },
+  data.kind === 'full' && data.scope && { label: 'Scope', value: data.scope },
 ].filter((item): item is { label: string; value: string } => Boolean(item));
 ---
 
-<BaseLayout
-  title={`${client} case study`}
-  description={summary}
-  image={cover}
-  imageAlt={coverAlt}
-  type="article"
-  structuredData={caseStudySchema(project, share.src)}
->
-  <article style={`--tint: ${tint}`}>
+<BaseLayout title={data.name} description={data.summary} type="article" structuredData={caseStudySchema(project)}>
+  <article>
     <header class="shell pt-12 sm:pt-16">
-      <nav aria-label="Breadcrumb" class="rise">
-        <ol class="flex items-center gap-2 text-sm text-muted">
-          <li>
-            <a class="hover:text-ink" href="/#work">
-              Work
-            </a>
-          </li>
-          <li aria-hidden="true">/</li>
-          <li>
-            <span aria-current="page" class="text-ink">
-              {client}
-            </span>
-          </li>
-        </ol>
-      </nav>
-      <h1 class="rise mt-8 max-w-[22ch] text-headline" style="--rise-step: 1">
-        {title}
+      <a class="rise flex w-fit items-center gap-2 text-sm text-muted hover:text-ink" href="/#work">
+        <Icon name="arrow-left" class="size-3.5" />
+        All case studies
+      </a>
+      <p class="rise eyebrow mt-8 flex w-fit">{data.name}</p>
+      <h1 class="rise mt-6 max-w-[22ch] text-headline" style="--rise-step: 1">
+        {data.title}
       </h1>
       <p class="rise mt-6 max-w-2xl text-lead text-body" style="--rise-step: 2">
-        {summary}
+        {data.summary}
       </p>
 
-      <div class="rise mt-12 grid gap-8 border-t border-line pt-8 lg:grid-cols-[1fr_auto]" style="--rise-step: 3">
-        <dl class="grid grid-cols-2 gap-x-8 gap-y-6 sm:grid-cols-3 lg:flex lg:gap-14">
-          {meta.map((item) => (
-            <div>
-              <dt class="text-sm text-muted">{item.label}</dt>
-              <dd class="mt-1 font-medium">{item.value}</dd>
-            </div>
-          ))}
-        </dl>
-        {url && (
-          <a class="btn btn-ghost btn-sm self-start" href={url} rel="noopener">
-            Visit {client}
-            <Icon name="arrow-up-right" class="icon-nudge-diagonal size-4" />
-          </a>
-        )}
-      </div>
+      <dl
+        class="rise mt-12 grid grid-cols-2 gap-x-8 gap-y-6 border-t border-line pt-8 sm:grid-cols-3 lg:flex lg:gap-14"
+        style="--rise-step: 3"
+      >
+        {meta.map((item) => (
+          <div>
+            <dt class="text-sm text-muted">{item.label}</dt>
+            <dd class="mt-1 font-medium">{item.value}</dd>
+          </div>
+        ))}
+      </dl>
 
-      {services.length > 0 && (
-        <ul class="mt-6 flex flex-wrap gap-1.5" aria-label="Services">
-          {services.map((service) => (
-            <li class="chip">{service}</li>
+      {data.stack.length > 0 && (
+        <ul class="mt-6 flex flex-wrap gap-1.5" aria-label="Tech stack">
+          {data.stack.map((item) => (
+            <li class="chip">{item}</li>
           ))}
         </ul>
       )}
     </header>
 
-    <div class="shell mt-12 sm:mt-16">
-      <div class="tint-panel overflow-hidden rounded-card p-[4%] sm:p-[6%]">
-        <Image
-          src={cover}
-          alt={coverAlt}
-          widths={[800, 1200, 1600, 2400, 3200]}
-          sizes="(min-width: 80rem) 68rem, 90vw"
-          quality={90}
-          loading="eager"
-          fetchpriority="high"
-          class="shot w-full"
-        />
-      </div>
-    </div>
-
     <div class="shell mt-16 sm:mt-24">
       <div class="prose case-prose">
         <Content components={mdxComponents} />
+
+        {data.kind === 'full' && (
+          <>
+            <h2>How it works</h2>
+            <ol>
+              {data.diagram.map((step) => (
+                <li>{step}</li>
+              ))}
+            </ol>
+
+            <h2>The result</h2>
+            <p>
+              <strong>{data.headline.value}</strong> {data.headline.label}
+            </p>
+            {data.result.map((line) => (
+              <p>{line}</p>
+            ))}
+          </>
+        )}
+
+        {quotes.length > 0 && (
+          <>
+            <h2>What colleagues said</h2>
+            {quotes.map((quote) => (
+              <figure>
+                <blockquote>
+                  <p>{quote.data.text}</p>
+                </blockquote>
+                <figcaption class="text-[0.95rem] text-muted">{attribution(quote)}</figcaption>
+              </figure>
+            ))}
+          </>
+        )}
       </div>
     </div>
   </article>
@@ -127,9 +122,7 @@ const meta = [
     margin-top: 0;
   }
 
-  .case-prose > :global(p:first-of-type) {
-    color: var(--ink);
-    font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.45rem);
-    line-height: 1.55;
+  .case-prose figure blockquote {
+    margin-block: 2.5em 0.75em;
   }
 </style>

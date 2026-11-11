@@ -1,0 +1,120 @@
+[
+  {
+    "id": "steady-core",
+    "text": "The steady core of the engineering team.",
+    "role": "Engineer",
+    "org": "Hive",
+    "date": "2024",
+    "pull": true
+  },
+  {
+    "id": "powerhouse",
+    "text": "A powerhouse of an engineer who puts out consistent banger work and high-quality features.",
+    "role": "Engineer",
+    "org": "Hive",
+    "date": "2025",
+    "theme": "Delivering big projects"
+  },
+  {
+    "id": "lifting-others",
+    "text": "Not only are you making great things yourself, but you're helping others do it too.",
+    "role": "Engineer",
+    "org": "Hive",
+    "date": "2024",
+    "theme": "Lifting others"
+  },
+  {
+    "id": "calm-under-pressure",
+    "text": "Nothing seems to phase you! You have a great attitude to solving problems and you bring the team on that journey.",
+    "role": "Product Owner",
+    "org": "Hive",
+    "date": "2023",
+    "theme": "Calm under pressure"
+  },
+  {
+    "id": "business-impact",
+    "text": "Your attention to detail and commitment to quality have made a real impact, and the whole business is feeling the difference.",
+    "role": "Deputy Head of Engineering",
+    "org": "Hive",
+    "date": "2025",
+    "theme": "Real business impact"
+  },
+  {
+    "id": "customer-deadlines",
+    "text": "Thanks for consistently meeting customer deadlines whilst keeping your attention to detail as high as possible.",
+    "role": "Former colleague",
+    "org": "Hive",
+    "date": "2018",
+    "theme": "Customer focus"
+  },
+  {
+    "id": "communication",
+    "text": "Great explanations of the technical work involved in the sprint, tailored nicely to your audience!",
+    "role": "Deputy Head of Engineering",
+    "org": "Hive",
+    "date": "2022",
+    "theme": "Communication"
+  },
+  {
+    "id": "scheduled-workstream",
+    "text": "You did a great job leading the workstream, collaborating with other teams, and ensuring our customers were always front and centre when creating our user workflow.",
+    "role": "Product Owner",
+    "org": "Hive",
+    "date": "April 2024"
+  },
+  {
+    "id": "scheduled-collaboration",
+    "text": "Huge congrats on delivering Scheduled Surveys! A special shout-out for your fantastic ability to collaborate across the board and for taking everyone's feedback onboard.",
+    "role": "Deputy Head of Engineering",
+    "org": "Hive",
+    "date": "March 2024"
+  },
+  {
+    "id": "heatmaps-slick",
+    "text": "Heatmaps front-end is getting really slick and responsive with your changes. They're so much nicer to use than they used to be.",
+    "role": "Engineer",
+    "org": "Hive",
+    "date": "2023"
+  },
+  {
+    "id": "heatmaps-connecting",
+    "text": "Thank you for all of your work connecting the front and back ends of heatmaps v2. You dived straight in and now it all works!",
+    "role": "Engineer",
+    "org": "Hive",
+    "date": "April 2023"
+  },
+  {
+    "id": "heatmaps-customer",
+    "text": "We love the speed of Hive… the heatmaps have worked really well.",
+    "role": "Customer",
+    "org": "UK university"
+  },
+  {
+    "id": "question-bank-finished",
+    "text": "Well played on finishing off the Question Bank project today. Customers will love this, it unlocks the doors to many many things including Custom Indexes, 360 Surveys, benchmarking on custom questions and more!",
+    "role": "Deputy Head of Engineering",
+    "org": "Hive",
+    "date": "June 2025"
+  },
+  {
+    "id": "question-bank-translated",
+    "text": "The translated Question Bank is going to make a big difference to customers, and the related foundational work is going to make per-customer Question Bank much easier.",
+    "role": "Head of Engineering",
+    "org": "Hive",
+    "date": "January 2025"
+  },
+  {
+    "id": "bloom",
+    "text": "Hive's comprehensive features, such as onboarding support, surveys, confidential feedback, and a bank of questions, perfectly aligned with Bloom's objectives.",
+    "name": "Pam Lamming",
+    "role": "Chief People Officer",
+    "org": "Bloom"
+  },
+  {
+    "id": "onboarding-gap",
+    "text": "Closing this feature gap has been so important, and it's great to see the positive impact your hard work is already having on new business and retention.",
+    "role": "Product Owner",
+    "org": "Hive",
+    "date": "January 2025"
+  }
+]

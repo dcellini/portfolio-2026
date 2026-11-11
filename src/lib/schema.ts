@@ -47,16 +47,14 @@ export const breadcrumbs = (items: { name: string; href: string }[]) => ({
   })),
 });
 
-export const caseStudySchema = (project: Project, image: string) => ({
+export const caseStudySchema = (project: Project) => ({
   '@context': 'https://schema.org',
   '@graph': [
     {
       '@type': 'CreativeWork',
-      name: `${project.data.client} case study`,
+      name: project.data.name,
       headline: project.data.title,
       description: project.data.summary,
-      image: absolute(image),
-      dateCreated: String(project.data.year),
       url: absolute(projectHref(project)),
       author: { '@id': absolute('/#person'), '@type': 'Person', name: siteConfig.author.name },
       inLanguage: siteConfig.language,
@@ -64,7 +62,7 @@ export const caseStudySchema = (project: Project, image: string) => ({
     breadcrumbs([
       { name: 'Home', href: '/' },
       { name: 'Work', href: '/#work' },
-      { name: project.data.client, href: projectHref(project) },
+      { name: project.data.name, href: projectHref(project) },
     ]),
   ],
 });

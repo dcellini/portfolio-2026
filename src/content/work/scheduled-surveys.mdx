@@ -1,0 +1,46 @@
+---
+kind: full
+order: 1
+name: Scheduled Surveys
+title: Surveys that send themselves, on the date admins choose
+summary: A Schedule tab, approval and locking, and queued sends on AWS EventBridge, so admins pick a date and the survey goes out on time.
+dates: Jan – Apr 2024
+role: Sole engineer, led the workstream
+scope: About 15 pull requests
+stack: [React, Redux, Node.js, AWS EventBridge, MongoDB]
+headline:
+  value: '0'
+  label: surveys Support now sends by hand for customers
+diagram:
+  - Admin picks a date
+  - Approved and queued
+  - Reminder email
+  - Edits lock 5 minutes before
+  - EventBridge sends on time
+inPractice:
+  - A Schedule tab with start date, time and duration, plus a warning outside normal working hours.
+  - An approval step, and locking so a scheduled survey can't be changed in the 5 minutes before it sends.
+  - Queued sends on AWS EventBridge, with a 30-second buffer so a last-second delete still clears the queue.
+  - Admin reminder emails, and a migration moving existing surveys onto the new event model.
+result:
+  - Shipped and in production. Customers schedule their own surveys, and the support team's manual send queue is gone.
+  - It laid the groundwork for onboarding and exit surveys.
+quotes: [scheduled-workstream, scheduled-collaboration]
+---
+
+## The problem
+
+Surveys could only go out the moment an admin finished building them, so admins had to log in at the exact time they wanted to launch.
+
+Customers saw scheduling as a basic expectation of an employee-voice tool. Until then, support staff were sending surveys on customers' behalf from a manual queue.
+
+It was also a stepping stone to onboarding and exit surveys, which needed surveys to send automatically.
+
+## What I did
+
+- A Schedule tab in the survey builder with start date, time and duration, plus a warning outside normal working hours.
+- An approval step and locking, so a scheduled survey can't be edited or deleted in the 5 minutes before it sends.
+- Queued sends on AWS EventBridge, with a 30-second buffer so a last-second delete still clears the queue.
+- A migration moving existing surveys onto the new event model.
+- Admin reminder emails: 48 hours before, or 1 hour for surveys that run 2 hours or less.
+- Released behind a feature flag, and fixed scheduled surveys showing as active before their start date.

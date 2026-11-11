@@ -3,6 +3,8 @@ import Icon from '@/components/ui/Icon.astro';
 import PageHero from '@/components/ui/PageHero.astro';
 import { resume } from '@/config/resume';
 import { siteConfig } from '@/config/site';
+import { experience } from '@/data/career';
+import { skills } from '@/data/skills';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { profileSchema } from '@/lib/schema';
 ---
@@ -51,11 +53,11 @@ import { profileSchema } from '@/lib/schema';
         Experience
       </h2>
       <ol class="grid gap-10">
-        {resume.experience.map((job) => (
+        {experience.map((job) => (
           <li class="grid gap-2 sm:grid-cols-[minmax(0,1fr)_auto] sm:gap-x-8">
             <h3 class="text-title">
               {job.role}
-              <span class="text-muted">, {job.company}</span>
+              <span class="text-muted">, {job.org}</span>
             </h3>
             <p class="text-sm text-muted sm:row-start-1 sm:col-start-2 sm:pt-1.5">{job.period}</p>
             <p class="max-w-2xl text-body">{job.text}</p>
@@ -69,7 +71,7 @@ import { profileSchema } from '@/lib/schema';
         Skills
       </h2>
       <div class="grid gap-8 sm:grid-cols-2">
-        {resume.skills.map((group) => (
+        {skills.map((group) => (
           <div>
             <h3 class="font-semibold">{group.title}</h3>
             <ul class="mt-3 flex flex-wrap gap-1.5">
