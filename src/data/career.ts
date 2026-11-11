@@ -68,7 +68,7 @@ export const experience: ExperienceEntry[] = [
     role: 'Software Engineer',
     org: 'Hive',
     period: 'Sep 2016 – Jul 2024',
-    // [TODO: confirm] Combines the 2016-2019 and 2019-2024 timeline rows.
+    // Combines the 2016-2019 and 2019-2024 timeline rows, as the CV does.
     text: 'Ran customer support on my own before there was a support team, then moved full-time into development. Built much of the drag-and-drop survey builder, then grew across the stack: Self-Select Demographics, right-to-left support, Heatmaps v2 and Scheduled Surveys.',
   },
   { role: 'Web Developer', org: 'Leighton', period: 'Jun 2014 – Sep 2016', text: timeline[3].text },
