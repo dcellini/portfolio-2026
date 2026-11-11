@@ -16,7 +16,6 @@ export const sections = {
   timeline: { eyebrow: 'Timeline', title: 'Where I’ve worked' },
   work: { eyebrow: 'Selected work', title: 'Case studies' },
   moreWork: { eyebrow: 'More work', title: 'Other things I’ve built' },
-  principles: { eyebrow: 'How I work', title: 'Six habits I bring to a team' },
   feedback: { eyebrow: 'What colleagues say', title: 'Feedback from the people I work with' },
   skills: { eyebrow: 'Skills', title: 'What I work with' },
 };
