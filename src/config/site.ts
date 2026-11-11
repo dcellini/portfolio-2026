@@ -29,12 +29,6 @@ export const siteConfig = {
     email: 'hello@davidcellini.co.uk',
   },
 
-  /** The pill above the homepage headline. Set `enabled: false` to remove it. */
-  availability: {
-    enabled: true,
-    label: 'Open to new roles',
-  },
-
   /** The button at the end of the header and in the mobile menu. */
   action: { label: 'Resume', href: '/resume/' },
 
