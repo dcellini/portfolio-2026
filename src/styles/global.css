@@ -111,18 +111,18 @@
   --ink: #121211;
   --body: #3b3b38;
   --muted: #6a6964;
-  /* Burnt orange. White text on #c2410c is 5.18:1; #9a3412 is for body-size orange text (6.5:1+). */
-  --accent: #c2410c;
-  --accent-strong: #9a3412;
-  --accent-ink: #9a3412;
+  /* Deep teal. White text on #0f766e is 5.5:1; #115e59 is for body-size teal text (7.3:1 on canvas). */
+  --accent: #0f766e;
+  --accent-strong: #115e59;
+  --accent-ink: #115e59;
   --on-accent: #ffffff;
   --inverse: #121211;
   --on-inverse: #fafaf7;
   --night: #121211;
   --night-ink: #f4f3ee;
   --night-muted: #a9a8a1;
-  /* The night panel is dark in both themes, so it always uses the lighter orange (7.9:1). */
-  --night-accent: #fb923c;
+  /* The night panel is dark in both themes, so it always uses the lighter teal (10.1:1). */
+  --night-accent: #2dd4bf;
   --shadow-card: 0 1px 2px rgb(18 18 17 / 0.05), 0 12px 32px -12px rgb(18 18 17 / 0.16);
   --shadow-shot: 0 2px 6px rgb(18 18 17 / 0.06), 0 30px 60px -24px rgb(18 18 17 / 0.3);
   --header-h: 4.5rem;
@@ -142,10 +142,10 @@
   --muted: #9d9c95;
   --inverse: #f4f3ee;
   --on-inverse: #121211;
-  /* Lighter orange for dark backgrounds: 7.5-8.6:1 on canvas, surface and sunken; #121211 text on it is 8.3:1. */
-  --accent: #fb923c;
-  --accent-strong: #fdba74;
-  --accent-ink: #fb923c;
+  /* Lighter teal for dark backgrounds: 9+:1 on canvas, surface and sunken; #121211 text on it is 10.1:1. */
+  --accent: #2dd4bf;
+  --accent-strong: #5eead4;
+  --accent-ink: #2dd4bf;
   --on-accent: #121211;
   --night: #171716;
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -12px rgb(0 0 0 / 0.6);
