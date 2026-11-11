@@ -3,12 +3,22 @@ export const hero = {
   highlight: 'from the UI down to the data.',
   text: 'Senior full-stack engineer with 10+ years at Hive, an employee-experience SaaS platform used by around 200 organisations for surveys, analytics and recognition. React and TypeScript on the front, GraphQL, Node.js and MongoDB behind it.',
   line: 'Looking for a senior frontend or full-stack role, remote or hybrid in the North East.',
-  primary: { label: 'See my work', href: '/#work' },
-  facts: [
-    { value: '10+', label: 'years building Hive, from support to senior engineer' },
-    { value: '740', label: 'pull requests merged to production since 2019' },
-    { value: '106', label: 'peer recognitions from colleagues over nine years' },
-  ],
+  primary: { label: 'See my work', href: '#work' },
+};
+
+export const facts = [
+  { value: '10+', label: 'years building Hive, from support to senior engineer' },
+  { value: '740', label: 'pull requests merged to production since 2019' },
+  { value: '106', label: 'peer recognitions from colleagues over nine years' },
+];
+
+export const sections = {
+  timeline: { eyebrow: 'Timeline', title: 'Where I’ve worked' },
+  work: { eyebrow: 'Selected work', title: 'Case studies' },
+  moreWork: { eyebrow: 'More work', title: 'Other things I’ve built' },
+  principles: { eyebrow: 'How I work', title: 'Six habits I bring to a team' },
+  feedback: { eyebrow: 'What colleagues say', title: 'Feedback from the people I work with' },
+  skills: { eyebrow: 'Skills', title: 'What I work with' },
 };
 
 export const closing = {

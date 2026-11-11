@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import RecognitionChart from '@/components/home/RecognitionChart.astro';
+import Icon from '@/components/ui/Icon.astro';
+import SectionHead from '@/components/ui/SectionHead.astro';
+import { sections } from '@/config/home';
+import { recognitionThemes } from '@/data/recognitions';
+import { attribution } from '@/lib/work';
+
+const quotes = await getCollection('quotes');
+const pull = quotes.find((q) => q.data.pull);
+// Cards follow the brief's order, not the collection's.
+const themeOrder = [
+  'Delivering big projects',
+  'Lifting others',
+  'Calm under pressure',
+  'Real business impact',
+  'Customer focus',
+  'Communication',
+];
+const themed = quotes
+  .filter((q) => q.data.theme)
+  .sort((a, b) => themeOrder.indexOf(a.data.theme!) - themeOrder.indexOf(b.data.theme!));
+---
+
+<section id="feedback" class="shell mt-24 sm:mt-32" aria-labelledby="feedback-title">
+  <SectionHead id="feedback-title" eyebrow={sections.feedback.eyebrow} title={sections.feedback.title} />
+
+  <div class="mt-12 grid gap-12 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
+    {pull && (
+      <figure class="reveal">
+        <Icon name="quote" class="size-8 text-accent-ink" />
+        <blockquote class="serif mt-4 max-w-[22ch] text-headline text-ink">
+          <p>“{pull.data.text}”</p>
+        </blockquote>
+        <figcaption class="mt-5 text-muted">{attribution(pull)}</figcaption>
+      </figure>
+    )}
+    <RecognitionChart />
+  </div>
+
+  <ul class="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {themed.map((quote) => (
+      <li class="reveal flex flex-col rounded-panel border border-line bg-surface p-6">
+        <p class="text-sm font-semibold text-accent-ink">{quote.data.theme}</p>
+        <figure class="mt-3 flex flex-1 flex-col">
+          <blockquote class="flex-1 text-body">
+            <p>“{quote.data.text}”</p>
+          </blockquote>
+          <figcaption class="mt-4 text-sm text-muted">{attribution(quote)}</figcaption>
+        </figure>
+      </li>
+    ))}
+  </ul>
+
+  <div class="mt-10">
+    <h3 class="text-sm font-medium text-muted">What recognitions mention most</h3>
+    <ul class="mt-3 flex flex-wrap gap-1.5">
+      {recognitionThemes.map((theme) => (
+        <li class="chip">{theme}</li>
+      ))}
+    </ul>
+  </div>
+</section>

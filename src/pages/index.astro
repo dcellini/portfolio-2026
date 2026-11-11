@@ -1,17 +1,22 @@
 ---
+import Feedback from '@/components/home/Feedback.astro';
 import Hero from '@/components/home/Hero.astro';
+import KeyFacts from '@/components/home/KeyFacts.astro';
+import MoreWork from '@/components/home/MoreWork.astro';
+import Principles from '@/components/home/Principles.astro';
+import Skills from '@/components/home/Skills.astro';
+import Timeline from '@/components/home/Timeline.astro';
+import WorkList from '@/components/home/WorkList.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 ---
 
 <BaseLayout>
   <Hero />
-
-  <!-- Placeholder until the case study viewer lands in phase 4. -->
-  <section id="work" class="shell" aria-labelledby="work-title">
-    <p class="eyebrow">Selected work</p>
-    <h2 id="work-title" class="mt-6 text-section">
-      Case studies
-    </h2>
-    <p class="mt-4 max-w-xl text-lead text-muted">Case studies are on their way.</p>
-  </section>
+  <KeyFacts />
+  <Timeline />
+  <WorkList />
+  <MoreWork />
+  <Principles />
+  <Feedback />
+  <Skills />
 </BaseLayout>

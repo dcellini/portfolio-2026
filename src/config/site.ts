@@ -32,7 +32,7 @@ export const siteConfig = {
   action: { label: 'Resume', href: '/resume/' },
 
   /** A PDF in `public/`, offered on the resume page. Leave empty to hide the button. */
-  resumePdf: '',
+  resumePdf: '/david-cellini-cv.pdf',
 
   socials: [
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/davidcellini/' },
@@ -40,6 +40,13 @@ export const siteConfig = {
   ] satisfies NavLink[],
 };
 
-export const navigation: NavLink[] = [{ label: 'Work', href: '/#work' }];
+/** Homepage sections, in page order. Root-relative so they work from every page. */
+export const navigation: NavLink[] = [
+  { label: 'Timeline', href: '/#timeline' },
+  { label: 'Work', href: '/#work' },
+  { label: 'Feedback', href: '/#feedback' },
+  { label: 'Skills', href: '/#skills' },
+  { label: 'Contact', href: '/#contact' },
+];
 
 export const legalLinks: NavLink[] = [{ label: 'Privacy', href: '/privacy/' }];
