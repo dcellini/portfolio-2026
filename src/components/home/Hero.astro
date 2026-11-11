@@ -1,11 +1,13 @@
 ---
+import { Picture } from 'astro:assets';
+import portrait from '@/assets/david-cellini.jpg';
 import Icon from '@/components/ui/Icon.astro';
 import { hero } from '@/config/home';
 import { siteConfig } from '@/config/site';
 ---
 
 <section id="top" class="shell pt-10 pb-14 sm:pt-12 sm:pb-16 lg:pt-14" aria-labelledby="hero-title">
-  <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_15rem] lg:items-end xl:grid-cols-[minmax(0,1fr)_17rem]">
+  <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_15rem] lg:items-center xl:grid-cols-[minmax(0,1fr)_17rem]">
     <div>
       {siteConfig.availability.enabled && (
         <p class="rise inline-flex items-center gap-3 rounded-full border border-line bg-surface py-1.5 pr-4 pl-3 text-sm text-body shadow-[0_1px_2px_rgb(18_18_17/0.04)]">
@@ -36,10 +38,16 @@ import { siteConfig } from '@/config/site';
       </div>
     </div>
 
-    <!-- Placeholder until the photo arrives; it becomes an <Image> with alt text then. -->
-    <div class="rise portrait-placeholder" style="--rise-step: 3" aria-hidden="true">
-      <span class="serif">DC</span>
-    </div>
+    <Picture
+      src={portrait}
+      formats={['avif', 'webp']}
+      alt="David Cellini, smiling, in a black T-shirt"
+      widths={[272, 408, 544, 816]}
+      sizes="(min-width: 80rem) 17rem, 15rem"
+      loading="eager"
+      class="rise portrait"
+      style="--rise-step: 3"
+    />
   </div>
 </section>
 
@@ -52,22 +60,19 @@ import { siteConfig } from '@/config/site';
     background: #22a55b;
   }
 
-  .portrait-placeholder {
-    display: grid;
-    place-items: center;
-    aspect-ratio: 4 / 5;
+  .portrait {
+    width: 100%;
     max-width: 17rem;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
     border: 1px solid var(--line);
     border-radius: var(--radius-card);
-    background:
-      radial-gradient(circle at 30% 20%, color-mix(in oklab, var(--accent) 22%, transparent), transparent 60%),
-      var(--sunken);
-    color: var(--muted);
-    font-size: clamp(4rem, 3rem + 4vw, 7rem);
   }
 
+  /* Phones and tablets keep the hero short; the photo shows from 1024px. */
   @media (max-width: 63.99rem) {
-    .portrait-placeholder {
+    .portrait {
       display: none;
     }
   }
