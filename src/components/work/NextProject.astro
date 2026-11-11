@@ -1,0 +1,41 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+import { projectHref, type Project } from '@/lib/work';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<aside class="shell mt-24 sm:mt-32" aria-labelledby="next-project">
+  <div class="next-card relative rounded-card border border-line bg-surface p-7 sm:p-10">
+    <p id="next-project" class="eyebrow">
+      Next
+    </p>
+    <p class="mt-6 text-title">
+      <a href={projectHref(project)} class="after:absolute after:inset-0 focus-visible:outline-none">
+        {project.data.name}
+      </a>
+    </p>
+    <p class="mt-2 max-w-2xl text-muted">{project.data.title}</p>
+    <span class="btn btn-primary btn-sm mt-8" aria-hidden="true">
+      Next: {project.data.name}
+      <Icon name="arrow-right" class="icon-nudge size-4" />
+    </span>
+  </div>
+</aside>
+
+<style>
+  .next-card:has(a:focus-visible) {
+    outline: 2px solid var(--ink);
+    outline-offset: 6px;
+  }
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    .next-card:hover .icon-nudge {
+      transform: translateX(3px);
+    }
+  }
+</style>

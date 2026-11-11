@@ -1,0 +1,12 @@
+---
+kind: short
+order: 20
+name: Production fixes
+title: Production fixes
+summary: Cut a large export's memory from 5.8 GB to 455 MB, and turned one index-race fix into a shared helper for 4 services.
+dates: '2026'
+---
+
+- Cut a large export's memory from 5.8 GB to 455 MB.
+- Fixed a messaging query that scanned ~12,700 documents per result.
+- Turned one index-race fix into a shared helper rolled out to 4 services.

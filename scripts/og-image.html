@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: 'Hanken Grotesk';
+        src: url('../public/fonts/hanken-grotesk/hanken-grotesk-latin.woff2') format('woff2');
+        font-weight: 100 900;
+      }
+      @font-face {
+        font-family: 'Instrument Serif';
+        src: url('../public/fonts/instrument-serif/instrument-serif-latin-italic.woff2') format('woff2');
+        font-style: italic;
+      }
+      html,
+      body {
+        margin: 0;
+      }
+      .card {
+        position: relative;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 1200px;
+        height: 630px;
+        padding: 72px 80px;
+        overflow: hidden;
+        background: #121211;
+        color: #f4f3ee;
+        font-family: 'Hanken Grotesk', sans-serif;
+      }
+      .card::after {
+        content: '';
+        position: absolute;
+        right: -160px;
+        bottom: -220px;
+        width: 620px;
+        height: 620px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgb(251 146 60 / 0.35), transparent 65%);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+      .name {
+        margin: 0;
+        font-size: 104px;
+        font-weight: 500;
+        line-height: 1;
+        letter-spacing: -0.045em;
+      }
+      .role {
+        margin: 20px 0 0;
+        color: #fb923c;
+        font-family: 'Instrument Serif', serif;
+        font-size: 64px;
+        font-style: italic;
+        line-height: 1.05;
+      }
+      .meta {
+        position: relative;
+        z-index: 1;
+        margin: 0;
+        color: #a9a8a1;
+        font-size: 28px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="brand">
+        <svg width="48" height="48" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <rect width="32" height="32" rx="9" fill="#fb923c" />
+          <path d="M11 9.5v13h4.25a6.5 6.5 0 0 0 0-13z" stroke="#121211" stroke-width="2.6" stroke-linejoin="round" />
+        </svg>
+        davidcellini.co.uk
+      </div>
+      <div>
+        <p class="name">David Cellini</p>
+        <p class="role">Senior full-stack engineer</p>
+      </div>
+      <p class="meta">React · TypeScript · GraphQL · Node.js · Newcastle upon Tyne</p>
+    </div>
+  </body>
+</html>

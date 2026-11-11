@@ -1,0 +1,93 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+import { hero } from '@/config/home';
+import { siteConfig } from '@/config/site';
+---
+
+<section id="top" class="shell pt-14 pb-16 sm:pt-20 sm:pb-20 lg:pt-24" aria-labelledby="hero-title">
+  <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end xl:grid-cols-[minmax(0,1fr)_22rem]">
+    <div>
+      {siteConfig.availability.enabled && (
+        <p class="rise inline-flex items-center gap-3 rounded-full border border-line bg-surface py-1.5 pr-4 pl-3 text-sm text-body shadow-[0_1px_2px_rgb(18_18_17/0.04)]">
+          <span class="availability-dot" aria-hidden="true" />
+          {siteConfig.availability.label}
+        </p>
+      )}
+
+      <h1 id="hero-title" class="rise mt-8 max-w-[17ch] text-display" style="--rise-step: 1">
+        {hero.title} <span class="serif">{hero.highlight}</span>
+      </h1>
+
+      <div class="rise mt-10" style="--rise-step: 2">
+        <p class="max-w-xl text-lead text-body">{hero.text}</p>
+        <p class="mt-4 max-w-xl font-medium text-ink">{hero.line}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a class="btn btn-primary" href={hero.primary.href}>
+            {hero.primary.label}
+            <Icon name="arrow-right" class="icon-nudge size-4" />
+          </a>
+          {siteConfig.resumePdf && (
+            <a class="btn btn-ghost" href={siteConfig.resumePdf} download>
+              <Icon name="download" class="size-4" />
+              Download CV (PDF)
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <!-- Placeholder until the photo arrives; it becomes an <Image> with alt text then. -->
+    <div class="rise portrait-placeholder" style="--rise-step: 3" aria-hidden="true">
+      <span class="serif">DC</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .availability-dot {
+    position: relative;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    background: #22a55b;
+  }
+
+  .portrait-placeholder {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 4 / 5;
+    max-width: 22rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    background:
+      radial-gradient(circle at 30% 20%, color-mix(in oklab, var(--accent) 22%, transparent), transparent 60%),
+      var(--sunken);
+    color: var(--muted);
+    font-size: clamp(4rem, 3rem + 4vw, 7rem);
+  }
+
+  @media (max-width: 63.99rem) {
+    .portrait-placeholder {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .availability-dot::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: inherit;
+      animation: ping 2.4s cubic-bezier(0, 0, 0.2, 1) 3; /* Stops after ~7s (WCAG 2.2.2). */
+    }
+  }
+
+  @keyframes ping {
+    75%,
+    100% {
+      transform: scale(2.4);
+      opacity: 0;
+    }
+  }
+</style>

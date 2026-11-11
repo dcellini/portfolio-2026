@@ -1,0 +1,83 @@
+---
+import { recognitionTotal, recognitions } from '@/data/recognitions';
+
+const max = Math.max(...recognitions.map((r) => r.count));
+const first = recognitions[0].year;
+const last = recognitions.at(-1)!.year;
+---
+
+<figure class="chart" aria-labelledby="recognition-caption">
+  <figcaption id="recognition-caption" class="text-body">
+    <strong class="font-semibold text-ink">{recognitionTotal} recognitions</strong>, {first} – {last}
+    <span class="sr-only">by year: {recognitions.map((r) => `${r.year}: ${r.count}`).join(', ')}.</span>
+  </figcaption>
+  <ol class="bars mt-6" aria-hidden="true">
+    {recognitions.map((r) => (
+      <li class="bar-col">
+        <span class="bar-value">{r.count}</span>
+        <span class="bar" style={`--h: ${(r.count / max) * 100}%`} />
+        <span class="bar-year">{String(r.year).slice(2)}</span>
+      </li>
+    ))}
+  </ol>
+  <p class="mt-2 text-xs text-muted" aria-hidden="true">
+    Peer recognitions per year (’17 = {first})
+  </p>
+</figure>
+
+<style>
+  .bars {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+    gap: 2px;
+    align-items: end;
+    height: 9rem;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .bar-col {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+  }
+
+  .bar {
+    width: min(100%, 1.5rem);
+    height: var(--h);
+    min-height: 2px;
+    border-radius: 4px 4px 0 0;
+    background: var(--accent);
+  }
+
+  .bar-value {
+    margin-bottom: 0.25rem;
+    color: var(--body);
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bar-year {
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .chart {
+    padding-bottom: 1.25rem;
+  }
+
+  .chart > p {
+    margin-top: 1.75rem;
+  }
+
+  @media (forced-colors: active) {
+    .bar {
+      background: CanvasText;
+    }
+  }
+</style>

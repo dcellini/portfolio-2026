@@ -1,0 +1,43 @@
+---
+kind: full
+order: 3
+name: Question Bank
+title: Gave every organisation its own translated question bank, and moved years of old data across safely
+summary: A per-organisation question bank with machine translation that never overwrites human work, plus a side-by-side migration of the legacy demographic questions.
+dates: Jan – Oct 2025
+role: Lead engineer
+scope: About 120 pull requests
+stack: [MongoDB, Mongoose, GraphQL, React, i18n]
+headline:
+  value: ~10k
+  label: lines of legacy code removed once the migration was done
+diagram:
+  - Questions copied into every survey
+  - One bank per organisation
+  - Translated automatically
+  - Unlocked Custom Indexes and 360 Surveys
+inPractice:
+  - A per-organisation MongoDB model using Mongoose discriminators, plus global questions shared by everyone.
+  - Machine translation that only fills empty languages, so human translations are never overwritten.
+  - Migrated the legacy demographic questions in, with old and new formats running side by side during rollout.
+  - Deleted the old code paths once the migration was done.
+result:
+  - Unlocked Custom Indexes, 360 Surveys and benchmarking on custom questions.
+  - In use across ~200 customers.
+  - Freed the support team from handling these translations and edits by hand.
+quotes: [question-bank-finished, question-bank-translated, bloom]
+---
+
+## The problem
+
+Questions lived inside each survey, so admins rebuilt the same questions repeatedly and translations drifted.
+
+Demographic questions used an older, separate model that reports depended on. Customers couldn't translate or edit those questions themselves: it all went through Support, often with Engineering. A customer running 21 languages across 10 such questions could need over 1,000 translations handled that way.
+
+## What I did
+
+- A per-organisation MongoDB model using Mongoose discriminators, plus global questions shared by everyone.
+- GraphQL create, update, archive and delete, and a React editor tuned to avoid needless re-renders.
+- Machine translation that only fills empty languages, so human translations are never overwritten.
+- Migrated the legacy demographic questions in, with old and new formats running side by side during rollout, then deleted the old code paths (~10k lines).
+- Added an index once real data showed a lookup was slow.

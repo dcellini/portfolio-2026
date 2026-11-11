@@ -1,0 +1,39 @@
+---
+kind: full
+order: 5
+name: Right-to-left and 20+ languages
+title: Made a left-to-right design system work in Arabic, then kept adding languages
+summary: CSS logical properties, a direction-aware component pattern and a right-to-left Storybook view, rolled out to employee pages and emails.
+dates: 2022, 2024 – 2025
+role: Led, with one other developer
+stack: [CSS, React, Storybook, react-intl, Handlebars]
+headline:
+  value: '13'
+  label: customer organisations using right-to-left layouts
+diagram:
+  - margin-left everywhere
+  - CSS logical properties
+  - Direction-aware components
+  - Arabic, mirrored
+inPractice:
+  - A DirectionProvider and useDirection pattern for components.
+  - Converted the design system to CSS logical properties, with direction-aware icons and a right-to-left Storybook view.
+  - Rolled out to employee pages and email templates.
+  - Later added 10 new locales and machine translation.
+result:
+  - 13 customer organisations use right-to-left layouts.
+  - "The pattern became part of the team's coding guidelines. [TODO: anything more to add to the result?]"
+---
+
+## The problem
+
+Customers with Arabic-speaking employees needed a mirrored layout, but the design system used physical CSS properties (`margin-left`) everywhere.
+
+## What I did
+
+- A `DirectionProvider` / `useDirection` pattern.
+- Converted the design system to CSS logical properties.
+- Direction-aware icons, and a right-to-left Storybook view.
+- Rolled out to employee pages and email templates.
+- Later added 10 new locales and machine translation.
+- Wrote the team documentation; the pattern became part of the coding guidelines.

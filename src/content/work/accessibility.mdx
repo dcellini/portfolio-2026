@@ -1,0 +1,43 @@
+---
+kind: full
+order: 4
+name: Accessibility (WCAG 2.2)
+title: Turned about 450 accessibility failures into around 80 shared fixes
+summary: An audit of 97 pages against WCAG 2.2 A and AA, with most failures traced back to shared components and fixed once.
+dates: '2026'
+role: Planning, reporting and fixes
+stack: [React, Design system, WCAG 2.2, Claude Code]
+headline:
+  value: 450 → 80
+  label: failures, once traced back to shared components
+diagram:
+  - 97 pages audited
+  - ~450 failures found
+  - Traced to shared components
+  - ~80 fixes in ~23 themed PRs
+inPractice:
+  - Audited 97 pages against every A and AA success criterion, with a consistency check against the issue tracker.
+  - Traced most failures to shared components, so ~450 failures became ~80 fixes in ~23 themed PRs.
+  - Shipped fixes for focus, reflow, motion, input purpose, accessible names and Escape-to-dismiss.
+  - Used Claude Code to build reusable reporting that regenerates burndown and status updates for leadership.
+result:
+  - 'Substantial progress toward WCAG 2.2 AA. [TODO: anything more to say about the result so far?]'
+---
+
+## The problem
+
+The platform needed to meet WCAG 2.2 A and AA for public-sector and regulated customers.
+
+## What I did
+
+- Audited 97 pages against every A and AA success criterion as a single source of truth, with a consistency check against the issue tracker.
+- Traced most failures to shared components: ~450 failures became ~80 fixes in ~23 themed PRs.
+- Split the work with a colleague, then moved to a shared priority queue.
+- Shipped fixes for:
+  - Escape-to-dismiss (1.4.13), via a reusable hook in the design system
+  - reflow at 320 px (1.4.10)
+  - visible focus (2.4.7)
+  - input purpose (1.3.5)
+  - motion (2.2.2)
+  - accessible names (4.1.2)
+- Used Claude Code to build reusable reporting that regenerates burndown and status updates for leadership from the project's own tracking data.
