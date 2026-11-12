@@ -7,7 +7,7 @@ summary: Fixed the Python/R key-driver integration and made AI narrative generat
 dates: Feb 2026 onwards
 role: Engineer, joined mid-project
 scope: About 15 pull requests
-stack: [Python, R, AWS Lambda, AWS Bedrock, GraphQL, React]
+stack: [Python, R, AWS Lambda, Amazon Bedrock, GraphQL, React, Jest]
 headline:
   value: On time
   label: large reports now finish within their AWS Lambda time limit
@@ -16,14 +16,14 @@ diagram:
     detail: "Manager and organisation reports start from a survey's results."
   - title: 'Key-driver analysis in Python/R'
     detail: 'The platform passes the right questions to the analysis, which finds what drives engagement.'
-  - title: 'AI narratives on AWS Bedrock'
+  - title: 'AI narratives on Amazon Bedrock'
     detail: 'Each section of the report gets a written summary, now generated concurrently.'
   - title: 'Report ready in time'
     detail: 'Large reports finish within their AWS Lambda time limit.'
 inPractice:
   - Fixed the Python/R key-driver integration, which was filtering out scaled questions and producing zero key drivers.
   - Added driver-level selection, and permission-based logic so managers see team or organisation key drivers.
-  - Made AI narrative generation on AWS Bedrock run concurrently, so large reports finish in time.
+  - Made AI narrative generation on Amazon Bedrock run concurrently, so large reports finish in time.
   - Fixed an eNPS attribute bug and turned report creation on by default for managers.
 result:
   - Live for customers.
@@ -42,4 +42,4 @@ Large reports could time out before they finished, and some surveys were produci
 - Fixed how key-driver data passed between the platform and the Python/R analysis. Scaled questions were being filtered out by mistake, which produced zero key drivers.
 - Added driver-level selection to report configuration, and permission-based logic so managers see team or organisation key drivers depending on their permissions.
 - Added support for grouped attributes when generating reports, turned report creation on by default for managers, and fixed an eNPS attribute bug on surveys with no key drivers.
-- Made AI narrative generation for organisation reports, on AWS Bedrock, run concurrently, on top of reliability fixes to the reporting Lambda.
+- Made AI narrative generation for organisation reports, on Amazon Bedrock, run concurrently, on top of reliability fixes to the reporting Lambda.

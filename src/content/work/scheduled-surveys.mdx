@@ -3,11 +3,11 @@ kind: full
 order: 1
 name: Scheduled Surveys
 title: Surveys that send themselves, on the date admins choose
-summary: A Schedule tab, approval and locking, and queued sends on AWS EventBridge, so admins pick a date and the survey goes out on time.
+summary: A Schedule tab, approval and locking, and queued sends on Amazon EventBridge, so admins pick a date and the survey goes out on time.
 dates: Jan – Apr 2024
 role: Sole engineer, led the workstream
 scope: About 15 pull requests
-stack: [React, Redux, Node.js, AWS EventBridge, MongoDB]
+stack: [React, Redux, Node.js, Express, REST, Amazon EventBridge, AWS Lambda, MongoDB, Handlebars, Storybook, Jest]
 headline:
   value: Zero
   label: surveys the support team now sends by hand for customers
@@ -15,7 +15,7 @@ diagram:
   - title: 'Admin picks a date'
     detail: 'A new Schedule tab sets the start date, time and duration, with a warning outside working hours.'
   - title: 'Approved and queued'
-    detail: 'An approval step queues the send on AWS EventBridge, with a 30-second buffer so a late delete still clears it.'
+    detail: 'An approval step queues the send on Amazon EventBridge, with a 30-second buffer so a late delete still clears it.'
   - title: 'Reminder email'
     detail: 'Admins get a reminder 48 hours before, or 1 hour before for surveys that run 2 hours or less.'
   - title: 'Edits lock 5 minutes before'
@@ -25,7 +25,7 @@ diagram:
 inPractice:
   - A Schedule tab with start date, time and duration, plus a warning outside normal working hours.
   - An approval step, and locking so a scheduled survey can't be changed in the 5 minutes before it sends.
-  - Queued sends on AWS EventBridge, with a 30-second buffer so a last-second delete still clears the queue.
+  - Queued sends on Amazon EventBridge, with a 30-second buffer so a last-second delete still clears the queue.
   - Admin reminder emails, and a migration moving existing surveys onto the new event model.
 result:
   - Shipped and in production. Customers schedule their own surveys, and the support team's manual send queue is gone, freeing a significant part of their time.
@@ -45,7 +45,7 @@ It was also a stepping stone to onboarding and exit surveys, which needed survey
 
 - A Schedule tab in the survey builder with start date, time and duration, plus a warning outside normal working hours. It replaced the old survey-close settings and layout.
 - An approval step and locking, so a scheduled survey can't be edited or deleted in the 5 minutes before it sends.
-- Queued sends on AWS EventBridge, with a 30-second buffer so a last-second delete still clears the queue.
+- Queued sends on Amazon EventBridge, with a 30-second buffer so a last-second delete still clears the queue.
 - A migration moving existing surveys onto the new event model.
-- Admin reminder emails: 48 hours before, or 1 hour for surveys that run 2 hours or less.
+- Admin reminder emails, 48 hours before or 1 hour before for surveys that run 2 hours or less, sent by an Express REST endpoint that a scheduled AWS Lambda triggers, with Handlebars email templates.
 - Released behind a feature flag, and fixed scheduled surveys showing as active before their start date.
