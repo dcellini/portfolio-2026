@@ -156,5 +156,32 @@
     "role": "Product Owner",
     "org": "Hive",
     "date": "February 2024"
+  },
+  {
+    "id": "auto-enrol-powerful",
+    "text": "Looks nice. v. powerful.",
+    "role": "Head of Engineering",
+    "org": "Hive",
+    "date": "2026"
+  },
+  {
+    "id": "auto-enrol-ui",
+    "text": "And looking good on the UI.",
+    "role": "Head of Engineering",
+    "org": "Hive",
+    "date": "2026"
+  },
+  {
+    "id": "launch-day-fix",
+    "text": "Thank you for explaining what went wrong and for working till late with your engineers to try and fix the issue so we could launch our survey on the day we had announced.",
+    "role": "Customer",
+    "org": "Hive customer"
+  },
+  {
+    "id": "reports-picked-up",
+    "text": "Massive thanks for jumping in to help with the manager reports! You've picked everything up so fast which will help us get these over the line.",
+    "role": "Product Owner",
+    "org": "Hive",
+    "date": "February 2026"
   }
 ]

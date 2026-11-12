@@ -38,7 +38,7 @@ const back =
 const meta = [
   { label: 'Dates', value: data.dates },
   data.role && { label: 'Role', value: data.role },
-  data.kind === 'full' && data.scope && { label: 'Scope', value: data.scope },
+  data.scope && { label: 'Scope', value: data.scope },
 ].filter((item): item is { label: string; value: string } => Boolean(item));
 ---
 
@@ -85,18 +85,24 @@ const meta = [
       <div class="prose case-prose">
         <Content components={mdxComponents} />
 
-        {data.kind === 'full' && (
+        {data.diagram && (
           <>
             <h2>How it works</h2>
             <div class="not-prose">
               <StepDiagram steps={data.diagram} label={`How ${data.name} works`} stacked details />
             </div>
+          </>
+        )}
 
+        {data.result && (
+          <>
             <h2>The result</h2>
-            <div class="not-prose headline-figure">
-              <p class="text-display leading-none text-accent-ink">{data.headline.value}</p>
-              <p class="mt-3 max-w-md text-lead text-muted">{data.headline.label}</p>
-            </div>
+            {data.kind === 'full' && (
+              <div class="not-prose headline-figure">
+                <p class="text-display leading-none text-accent-ink">{data.headline.value}</p>
+                <p class="mt-3 max-w-md text-lead text-muted">{data.headline.label}</p>
+              </div>
+            )}
             {data.result.length > 1 ? (
               <ul>
                 {data.result.map((line) => (
