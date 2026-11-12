@@ -30,14 +30,17 @@ export const skills: SkillGroup[] = [
       'RxJS',
       'Zod',
       'MongoDB',
+      'Mongoose',
       'Atlas Search',
       'Elasticsearch',
+      'Handlebars',
     ],
   },
   {
     title: 'Cloud, delivery and testing',
     items: [
       'AWS Lambda',
+      'AWS Batch',
       'Amazon EventBridge',
       'Amazon S3',
       'Amazon SNS',
@@ -51,6 +54,7 @@ export const skills: SkillGroup[] = [
       'pnpm',
       'Git',
       'Vitest',
+      'Jest',
     ],
   },
   {
