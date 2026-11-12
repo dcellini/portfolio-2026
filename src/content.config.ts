@@ -43,6 +43,8 @@ const common = {
   stack: z.array(z.string()).default([]),
   /** A live demo or other public link, shown as a button under the stack. */
   link: z.object({ href: z.string().url(), label: z.string() }).optional(),
+  /** Public source code, shown as a "View the code" button. */
+  repo: z.string().url().optional(),
   quotes: z.array(reference('quotes')).default([]),
   /** Lower numbers come first. */
   order: z.number().int(),
