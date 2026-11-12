@@ -78,6 +78,22 @@ const meta = [
             ))}
           </ul>
         )}
+        {(data.link || data.repo) && (
+          <div class="mt-8 flex flex-wrap gap-3">
+            {data.link && (
+              <a class="btn btn-primary btn-sm" href={data.link.href} rel="noopener">
+                {data.link.label}
+                <Icon name="arrow-up-right" class="size-3.5" />
+              </a>
+            )}
+            {data.repo && (
+              <a class="btn btn-ghost btn-sm" href={data.repo} rel="noopener">
+                <Icon name="social-github" class="size-3.5" />
+                View the code
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </header>
 

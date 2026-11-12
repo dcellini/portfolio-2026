@@ -1,0 +1,49 @@
+---
+kind: short
+order: 10
+name: Feedback Analyser
+title: Feedback Analyser, an AI app that checks its own answers
+summary: A side project to learn AI engineering properly. It analyses employee feedback, answers questions with RAG and an agent, then checks every answer against the evidence.
+dates: '2026'
+role: Side project
+stack: [TypeScript, Node.js, Express, Gemini API, Zod, React, Vite, Vitest, Cloudflare Workers]
+link:
+  href: https://feedback-analyser.davidcellini.co.uk/
+  label: Try the demo
+repo: https://github.com/dcellini/feedback-analyser
+diagram:
+  - title: 'Question'
+    detail: 'For example, "What do employees say about their managers?"'
+  - title: 'Agent calls approved tools'
+    detail: 'Gemini asks to search the feedback or calculate statistics, and TypeScript validates and runs each call.'
+  - title: 'Answer with sources'
+    detail: 'The answer is generated from what the tools returned, with personal data redacted.'
+  - title: 'Grounding check'
+    detail: 'Quotes, source references and numbers are checked against the evidence. Answers that fail are rejected, not shown.'
+result:
+  - A public demo on Cloudflare Workers, with an Express API and a React front end served from one Worker.
+  - The demo replays recorded AI responses through the real pipeline, on invented feedback, so it runs free and gives the same result every time. Live AI answers are coming next.
+  - Two deliberately faulty recordings, an invented quote and a wrong count, show the checks rejecting bad answers.
+---
+
+## Why I built it
+
+I use AI tools every day, and I wanted to understand how to build reliable software around large language models, not just how to write prompts.
+
+So I built a small employee-feedback analyser, one concept at a time, and wrote up what I learned as I went.
+
+## What it does
+
+- **Feedback analysis:** finds the sentiment, themes and priority of a comment, and summarises it.
+- **Evaluation:** measures how accurate the analyses are, with deterministic checks, semantic checks and an LLM acting as judge.
+- **Semantic search and RAG:** finds feedback by meaning rather than exact words, and uses it to answer questions with sources.
+- **Tool calling and an agent:** lets Gemini request approved TypeScript functions, over several steps, to answer harder questions.
+- **Grounding:** checks quotes, source references and numerical claims against the evidence before an answer is shown.
+- **Privacy:** redacts email addresses and UK mobile numbers.
+
+## How I built it
+
+- Treated every AI response as untrusted data, validated with Zod before it's used.
+- Kept the workflows independent of the AI provider, with dependency injection and mock providers, so the tests never call a live model.
+- Covered it with automated tests in Vitest, for both the API and the React front end, checked in GitHub Actions on every push.
+- Built the HTTP API twice, once with Express and once with no framework, to understand what Express does for you.
