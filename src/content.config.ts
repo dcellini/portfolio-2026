@@ -24,6 +24,9 @@ const quotes = defineCollection({
   }),
 });
 
+/** One step in a "How it works" diagram. `detail` shows on the full page only. */
+const step = z.union([z.string(), z.object({ title: z.string(), detail: z.string().optional() })]);
+
 /** Fields shared by full case studies and short "More work" pages. */
 const common = {
   /** Outcome-led title used as the page heading. */
@@ -35,6 +38,8 @@ const common = {
   /** One or two plain sentences for cards and the meta description. */
   summary: z.string(),
   role: z.string().optional(),
+  /** e.g. "About 15 pull requests". */
+  scope: z.string().optional(),
   stack: z.array(z.string()).default([]),
   quotes: z.array(reference('quotes')).default([]),
   /** Lower numbers come first. */
@@ -50,12 +55,10 @@ const work = defineCollection({
       kind: z.literal('full'),
       ...common,
       role: z.string(),
-      /** e.g. "About 15 pull requests". */
-      scope: z.string().optional(),
       /** The one headline figure in the viewer panel. */
       headline: z.object({ value: z.string(), label: z.string() }),
       /** Steps for the "How it works" diagram, in order. `detail` shows on the full page only. */
-      diagram: z.array(z.union([z.string(), z.object({ title: z.string(), detail: z.string().optional() })])).min(3),
+      diagram: z.array(step).min(3),
       /** 3-5 "In practice" bullets for the viewer panel. */
       inPractice: z.array(z.string()).min(3).max(5),
       /** "The result" section, one paragraph or bullet per item. */
@@ -64,6 +67,10 @@ const work = defineCollection({
     z.object({
       kind: z.literal('short'),
       ...common,
+      /** Optional "How it works" steps, as for full case studies. */
+      diagram: z.array(step).min(3).optional(),
+      /** Optional "The result" section. */
+      result: z.array(z.string()).min(1).optional(),
     }),
   ]),
 });

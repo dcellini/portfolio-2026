@@ -2,16 +2,36 @@
 kind: short
 order: 15
 name: Survey auto-enrolment
-title: Survey auto-enrolment, designed end to end
-summary: System design from RFC to rule builder. A new Node.js service, a scheduled AWS Lambda and a rule-based audience builder in React.
+title: New starters and leavers enrolled in the right survey automatically
+summary: System design from RFC to rule builder. A new Node.js service, a scheduled AWS Lambda, AWS Batch sending and a rule-based audience builder I designed myself.
 dates: '2026'
-stack: [Node.js, AWS Lambda, React]
+role: Designed and built end to end
+stack: [Node.js, TypeScript, AWS Lambda, AWS Batch, GraphQL, React]
+diagram:
+  - title: 'Admin sets the rules'
+    detail: 'A rule builder defines who gets the survey, for example "joined in the last 30 days, in these departments".'
+  - title: 'Scheduled AWS Lambda'
+    detail: 'Runs on a schedule and asks the new service who now matches each rule.'
+  - title: 'Auto-enrolment service'
+    detail: 'A new Node.js service works out each cohort, across several distribution lists per survey.'
+  - title: 'Cohorts sent with AWS Batch'
+    detail: 'Each matching cohort is enrolled and sent the survey, with nobody adding them by hand.'
+result:
+  - Built and working end to end in a development environment, and demoed internally to a strong reaction.
+  - Not yet released.
+quotes: [auto-enrol-powerful, auto-enrol-ui]
 ---
 
-I designed and built survey auto-enrolment end to end, starting from an RFC.
+## The problem
 
-- A new Node.js microservice.
-- A scheduled AWS Lambda.
-- A rule-based audience builder in React.
+Onboarding and exit surveys only work if the right people get them at the right time. Admins had to add every new starter and leaver by hand.
 
-It was delivered as a reviewable stack of pull requests.
+As more organisations used onboarding and exit surveys, that manual step became a real bottleneck for medium and large organisations. Automating it became the most common follow-up request from customers.
+
+## What I did
+
+- Wrote the RFC covering the architecture, data schemas and end-to-end flow, then a detailed implementation spec.
+- Designed rule-based audiences, for example "joined in the last 30 days, in these departments", and a model that lets one survey have several distribution lists.
+- Split the build into a stack of about 16 reviewable pull requests across 10 packages: shared contracts, a new service, a scheduled trigger, changes to the survey and user services, GraphQL, and a five-part front end.
+- Designed the rule builder and recipients tab myself, end to end, with no design input.
+- Deployed the full stack to a development environment and fixed the infrastructure gaps that exposed.

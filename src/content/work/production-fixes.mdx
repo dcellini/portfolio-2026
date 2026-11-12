@@ -2,11 +2,43 @@
 kind: short
 order: 20
 name: Production fixes
-title: Production fixes
+title: Production fixes, from memory limits to a launch-day language bug
 summary: Cut a large export's memory from 5.8 GB to 455 MB, and turned one index-race fix into a shared helper for 4 services.
 dates: '2026'
+stack: [Node.js, MongoDB, MongoDB Atlas, i18n]
+quotes: [launch-day-fix]
 ---
 
-- Cut a large export's memory from 5.8 GB to 455 MB.
-- Fixed a messaging query that scanned ~12,700 documents per result.
-- Turned one index-race fix into a shared helper rolled out to 4 services.
+A few of the production problems I tracked down and fixed. Each one is the problem, the cause, and the fix.
+
+## A large export that crashed live traffic
+
+**Problem.** A large survey export, of about 450,000 answers, crashed the service that also served live traffic. Every retry crashed another copy.
+
+**Cause.** Each respondent's details were rebuilt for every answer, and all of it was held in memory.
+
+**Fix.** Built each respondent's details once and skipped the fields the export didn't use. In a benchmark, memory fell from about 5.8 GB to 455 MB.
+
+## A query scanning thousands of documents
+
+**Problem.** Monitoring alerts showed a messaging query scanning about 12,700 documents for every one it returned.
+
+**Cause.** A lookup on conversation participants had no supporting index.
+
+**Fix.** Added the index, and the alert cleared.
+
+## New organisations failing setup
+
+**Problem.** New organisations sometimes failed setup.
+
+**Cause.** Data migrations ran before MongoDB had finished building its indexes.
+
+**Fix.** Added a shared "wait for indexes" helper and rolled it out to 4 services.
+
+## A language switch that broke a survey launch
+
+**Problem.** During a customer's live survey launch, switching the survey's language reloaded the page back in English, for every employee who didn't speak English.
+
+**Cause.** Nothing showed up in error monitoring or the network tab, so it took a same-evening investigation to pin down.
+
+**Fix.** Shipped and merged the fix the same evening, and confirmed it working with the customer the next morning, so they launched on the day they'd announced.
