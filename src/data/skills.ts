@@ -1,11 +1,14 @@
 export interface SkillGroup {
   title: string;
+  /** A Lucide icon name from `src/icons/lucide` for the group heading. */
+  icon: string;
   items: string[];
 }
 
 export const skills: SkillGroup[] = [
   {
     title: 'Frontend',
+    icon: 'monitor-smartphone',
     items: [
       'React',
       'TypeScript',
@@ -22,6 +25,7 @@ export const skills: SkillGroup[] = [
   },
   {
     title: 'Backend and data',
+    icon: 'database',
     items: [
       'Node.js',
       'GraphQL (Apollo)',
@@ -38,6 +42,7 @@ export const skills: SkillGroup[] = [
   },
   {
     title: 'Cloud, delivery and testing',
+    icon: 'cloud',
     items: [
       'AWS Lambda',
       'AWS Batch',
@@ -59,6 +64,7 @@ export const skills: SkillGroup[] = [
   },
   {
     title: 'AI tools',
+    icon: 'sparkles',
     items: ['Claude Code', 'Anthropic API', 'Amazon Bedrock', 'GitHub Copilot', 'Superset'],
   },
 ];

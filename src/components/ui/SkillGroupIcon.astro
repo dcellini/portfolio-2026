@@ -1,0 +1,27 @@
+---
+import Icon from '@/components/ui/Icon.astro';
+
+interface Props {
+  /** A Lucide icon name from `src/icons/lucide`. */
+  name: string;
+}
+
+const { name } = Astro.props;
+---
+
+<span class="group-icon" aria-hidden="true">
+  <Icon name={name} class="size-5" />
+</span>
+
+<style>
+  .group-icon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.75rem;
+    background: color-mix(in oklab, var(--accent) 14%, var(--surface));
+    color: var(--accent-ink);
+  }
+</style>
