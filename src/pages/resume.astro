@@ -5,6 +5,8 @@ import { resume } from '@/config/resume';
 import { siteConfig } from '@/config/site';
 import { experience } from '@/data/career';
 import { skills } from '@/data/skills';
+import SkillChip from '@/components/ui/SkillChip.astro';
+import SkillGroupIcon from '@/components/ui/SkillGroupIcon.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { profileSchema } from '@/lib/schema';
 ---
@@ -73,10 +75,13 @@ import { profileSchema } from '@/lib/schema';
       <div class="grid gap-8 sm:grid-cols-2">
         {skills.map((group) => (
           <div>
-            <h3 class="font-semibold">{group.title}</h3>
-            <ul class="mt-3 flex flex-wrap gap-1.5">
+            <h3 class="flex items-center gap-3 font-semibold">
+              <SkillGroupIcon name={group.icon} />
+              {group.title}
+            </h3>
+            <ul class="mt-4 flex flex-wrap gap-2">
               {group.items.map((item) => (
-                <li class="chip">{item}</li>
+                <SkillChip name={item} />
               ))}
             </ul>
           </div>
