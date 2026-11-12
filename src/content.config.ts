@@ -41,6 +41,8 @@ const common = {
   /** e.g. "About 15 pull requests". */
   scope: z.string().optional(),
   stack: z.array(z.string()).default([]),
+  /** A live demo or other public link, shown as a button under the stack. */
+  link: z.object({ href: z.string().url(), label: z.string() }).optional(),
   quotes: z.array(reference('quotes')).default([]),
   /** Lower numbers come first. */
   order: z.number().int(),

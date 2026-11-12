@@ -78,6 +78,12 @@ const meta = [
             ))}
           </ul>
         )}
+        {data.link && (
+          <a class="btn btn-primary btn-sm mt-8" href={data.link.href} rel="noopener">
+            {data.link.label}
+            <Icon name="arrow-up-right" class="size-3.5" />
+          </a>
+        )}
       </div>
     </header>
 
