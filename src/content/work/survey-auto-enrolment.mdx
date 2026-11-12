@@ -1,12 +1,16 @@
 ---
-kind: short
-order: 15
+kind: full
+order: 8
 name: Survey auto-enrolment
 title: New starters and leavers enrolled in the right survey automatically
 summary: System design from RFC to rule builder. A new Node.js service, a scheduled AWS Lambda, AWS Batch sending and a rule-based audience builder I designed myself.
 dates: '2026'
 role: Designed and built end to end
+scope: About 16 pull requests across 10 packages
 stack: [Node.js, TypeScript, AWS Lambda, AWS Batch, GraphQL, React]
+headline:
+  value: '16'
+  label: reviewable pull requests across 10 packages, from a single RFC
 diagram:
   - title: 'Admin sets the rules'
     detail: 'A rule builder defines who gets the survey, for example "joined in the last 30 days, in these departments".'
@@ -16,10 +20,15 @@ diagram:
     detail: 'A new Node.js service works out each cohort, across several distribution lists per survey.'
   - title: 'Cohorts sent with AWS Batch'
     detail: 'Each matching cohort is enrolled and sent the survey, with nobody adding them by hand.'
+inPractice:
+  - Wrote the RFC and implementation spec covering architecture, data schemas and the end-to-end flow.
+  - Designed rule-based audiences, such as "joined in the last 30 days, in these departments", with several distribution lists per survey.
+  - Built a new Node.js service, a scheduled AWS Lambda and AWS Batch sending.
+  - Designed and built the rule builder and recipients tab myself, with no design input.
 result:
   - Built and working end to end in a development environment, and demoed internally to a strong reaction.
   - Not yet released.
-quotes: [auto-enrol-powerful, auto-enrol-ui]
+quotes: [auto-enrol-ui, auto-enrol-powerful]
 ---
 
 ## The problem

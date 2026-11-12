@@ -1,12 +1,16 @@
 ---
-kind: short
-order: 40
+kind: full
+order: 9
 name: Reports and AI narratives
 title: Reports and AI narratives that finish on time
 summary: Fixed the Python/R key-driver integration and made AI narrative generation run concurrently, so large reports finish within their time limit.
 dates: Feb 2026 onwards
+role: Engineer, joined mid-project
 scope: About 15 pull requests
 stack: [Python, R, AWS Lambda, AWS Bedrock, GraphQL, React]
+headline:
+  value: On time
+  label: large reports now finish within their AWS Lambda time limit
 diagram:
   - title: 'Survey results'
     detail: "Manager and organisation reports start from a survey's results."
@@ -16,6 +20,11 @@ diagram:
     detail: 'Each section of the report gets a written summary, now generated concurrently.'
   - title: 'Report ready in time'
     detail: 'Large reports finish within their AWS Lambda time limit.'
+inPractice:
+  - Fixed the Python/R key-driver integration, which was filtering out scaled questions and producing zero key drivers.
+  - Added driver-level selection, and permission-based logic so managers see team or organisation key drivers.
+  - Made AI narrative generation on AWS Bedrock run concurrently, so large reports finish in time.
+  - Fixed an eNPS attribute bug and turned report creation on by default for managers.
 result:
   - Live for customers.
   - Fewer support tickets and alerts for reports timing out.
