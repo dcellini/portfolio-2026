@@ -45,8 +45,8 @@ export const siteConfig = {
 export const navigation: NavLink[] = [
   { label: 'Timeline', href: '/#timeline' },
   { label: 'Work', href: '/#work' },
-  { label: 'Feedback', href: '/#feedback' },
   { label: 'Skills', href: '/#skills' },
+  { label: 'Feedback', href: '/#feedback' },
   { label: 'Contact', href: '/#contact' },
 ];
 
