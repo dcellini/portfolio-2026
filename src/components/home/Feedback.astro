@@ -53,12 +53,26 @@ const themed = quotes
     ))}
   </ul>
 
-  <div class="mt-10">
+  <div class="mt-14">
     <h3 class="text-sm font-medium text-muted">What recognitions mention most</h3>
-    <ul class="mt-3 flex flex-wrap gap-1.5">
+    <ul class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
       {recognitionThemes.map((theme) => (
-        <li class="chip">{theme}</li>
+        <li class="reveal theme-tile flex items-start gap-3 rounded-panel border border-line bg-surface p-4">
+          <span class="theme-icon grid size-10 shrink-0 place-items-center rounded-xl text-accent-ink">
+            <Icon name={theme.icon} class="size-5" />
+          </span>
+          <span>
+            <span class="block font-semibold text-ink">{theme.label}</span>
+            <span class="mt-0.5 block text-sm text-muted">{theme.detail}</span>
+          </span>
+        </li>
       ))}
     </ul>
   </div>
 </section>
+
+<style>
+  .theme-icon {
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+  }
+</style>
