@@ -13,7 +13,7 @@ export const siteConfig = {
   locale: 'en_GB',
   dateLocale: 'en-GB',
   /** The default share image, in `public/`. Regenerate with scripts/og-image.mjs. */
-  socialImage: '/og-image.png',
+  socialImage: '/og-image.png?v=2',
 
   /**
    * Cloudflare Web Analytics site token. Public by design (it ships to every
