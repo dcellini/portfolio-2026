@@ -6,14 +6,14 @@ import { hero } from '@/config/home';
 import { siteConfig } from '@/config/site';
 ---
 
-<section id="top" class="shell pt-10 pb-14 sm:pt-12 sm:pb-16 lg:pt-14" aria-labelledby="hero-title">
+<section id="top" class="shell pt-4 pb-12 sm:pt-8 sm:pb-16 lg:pt-14" aria-labelledby="hero-title">
   <div class="hero-grid">
     <Picture
       src={portrait}
       formats={['avif', 'webp']}
       alt="David Cellini, smiling, in a black T-shirt"
       widths={[176, 272, 408, 544, 816]}
-      sizes="(min-width: 80rem) 17rem, (min-width: 64rem) 15rem, 11rem"
+      sizes="(min-width: 80rem) 17rem, (min-width: 64rem) 15rem, 11.5rem"
       pictureAttributes={{ class: 'portrait-frame' }}
       loading="eager"
       class="rise portrait"
@@ -49,26 +49,27 @@ import { siteConfig } from '@/config/site';
   .hero-grid {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 1.75rem;
+    gap: 1.25rem;
   }
 
   .portrait-frame {
     justify-self: center;
-    width: 8rem;
-    height: 8rem;
+    width: 9.5rem;
+    height: 9.5rem;
     overflow: hidden;
     border: 1px solid var(--line);
     border-radius: 999px;
   }
 
-  /* Zoom in on the face, which would be tiny in a small circle. sizes="11rem" covers the zoom. */
+  /* Crop from the top of the photo and zoom in a little, so the circle shows the whole head with some space
+     above it and less shoulder. sizes="11.5rem" covers the zoom. */
   .portrait {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 50% 30%;
-    transform: scale(1.35);
-    transform-origin: 50% 30%;
+    object-position: 50% 0%;
+    transform: scale(1.2);
+    transform-origin: 50% 4%;
   }
 
   .hero-text {
